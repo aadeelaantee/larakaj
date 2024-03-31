@@ -41,9 +41,9 @@
     </div>
     
     <div class="row"  id="comments">
-        <div class="col-12 text-end mt-5">
+        <div class="col-12 text-end mt-5 mb-3">
             <a class="btn btn-outline-primary btn-sm" href="#comments">
-                {{ $row->comments()->where('active', true)->count() }} {{ __('Comments') }}
+                {{ $row->comments()->where('active', true)->whereNull('parent_id')->count() }} {{ __('Comments') }}
             </a>
         </div>    
     </div>   
@@ -60,7 +60,7 @@
         </div>
     </div>           
     
-    <form method="post" action="" class="form mb-3" role="form">
+    <form method="post" action="{{ route('store_comment', ['post' => $row]) }}" class="form mb-3" role="form">
     @csrf
     {!! form_row($commentForm->parent_id) !!}
 

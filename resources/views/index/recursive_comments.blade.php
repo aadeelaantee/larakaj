@@ -1,18 +1,14 @@
     @foreach ($comments as $comment)
-        @if ($loop->depth == 1 & $loop->first)
-            <div class="row" dir="auto">
-        @endif
 
-
-            <div  class="col-{{ 12 - $loop->depth - 1 }} offset-{{ $loop->depth - 1 }}">
-                <div class="row">
-                    <div class="col-1">
-                    <img class="img-fluid" src="{{-- comment.avatar(128) --}}">
+            <div  class="col-{{ 14 - $loop->depth - 1 }} offset-{{ $loop->depth - 1 }}">
+                <div class="text-start row">
+                    <div class="text-start col-1">
+                        <img class="img-fluid" src="{{ $comment->author?->avatar(128) ?? $comment->avatar(128) }}">
                      </div>
                     <div class="col-11">
                         <span class="badge bg-warning">
                         @if ($comment->author)
-                            <a href="{{ url_for('user.index.profile', ['lang_code' => 'fa', 'username' => $comment->author->username]) }}">
+                            <a href="{{ route('profile', ['user' => $comment->author]) }}">
                                 {{ $comment->author->name }}
                             </a>
                         @else                
@@ -30,6 +26,5 @@
             @if ($comment->children)
                 @include('index.recursive_comments', ['comments' => $comment->children])
             @endif
-                        
-        @if ($loop->depth == 1 && $loop->last) </div> @endif   
+        
     @endforeach

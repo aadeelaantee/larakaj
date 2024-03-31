@@ -82,7 +82,8 @@
 
                     @if ($comments)
                         @foreach ($comments as $comment)
-                            <a href="{{ route('post', ['langCode' => $comment->post->lang_code, 'post' => $post]) }}">{{ $comment->comment }}</a> <br>
+                            <a href="{{ route('post', ['langCode' => $comment->post->lang_code, 'post' => $post]) }}">
+                                {{ str($comment->comment)->limit(50) }}</a> <br>
                         @endforeach
                     @endif
                 </div>

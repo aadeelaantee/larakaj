@@ -64,7 +64,11 @@
                     @if (request()->user()->isAdministrator())
                         <li class="nav-item">
                           <a @class(['nav-link', 
-                                'active fw-bold' => $routeName == 'admin.posts.index',
+                                'active fw-bold' => in_array($routeName, [
+                                    'admin.posts.index',
+                                    'admin.posts.create',
+                                    'admin.posts.edit',
+                                ]),
                             ])
                             
                             aria-current="page" href="{{ route('admin.posts.index') }}">{{ __('Posts') }}</a>
@@ -73,7 +77,10 @@
                         <li class="nav-item">
                           <a @class([
                                 'nav-link', 
-                                'active fw-bold' => $routeName == 'admin.stories.index',
+                                'active fw-bold' => in_array($routeName, [
+                                    'admin.stories.index',
+                                    'admin.stories.edit',
+                                ]),
                             ]) aria-current="page" href="{{ route('admin.stories.index') }}">{{ __('Stories') }}</a>
                         </li>
                         
@@ -89,7 +96,9 @@
                                 "nav-link",
                                 'active fw-bold' => in_array($routeName, [
                                     'admin.ldmanager.index',
-                                    'admin.linkdumps.index',
+                                    'admin.ldmanager.category',
+                                    'admin.ldmanager.edit_link',
+                                    'admin.ldmanager.edit_category',
                                 ]),
                             ])  aria-current="page" href="{{ route('admin.ldmanager.index') }}">{{ __('Linkdumps') }}</a>
                         </li>
@@ -97,14 +106,20 @@
                         <li class="nav-item">
                           <a @class([
                                 "nav-link",
-                                'active fw-bold' => $routeName == 'admin.lang_codes.index',
+                                'active fw-bold' => in_array($routeName, [
+                                    'admin.lang_codes.index',
+                                    'admin.lang_codes.edit',
+                                ]),
                             ])  aria-current="page" href="{{ route('admin.lang_codes.index') }}">{{ __('Lang codes') }}</a>
                         </li>
 
                         <li class="nav-item">
                           <a @class([
                                 "nav-link",
-                                'active fw-bold' => $routeName == 'users',
+                                'active fw-bold' => in_array($routeName, [
+                                    'admin.users.index',
+                                    'admin.users.edit'
+                                ]),
                             ]) aria-current="page" href="{{ route('admin.users.index') }}">{{ __('Users') }}</a>
                         </li>
                     @endif
@@ -148,7 +163,7 @@
         
         
 
-        <div class="container" dir="auto">
+        <div class="container">
 
             <div class="row">
                 <div @class([
@@ -175,21 +190,12 @@
                     @endsession
 
                     <div class="row">
-                        {{--
-                        {% if not request.blueprint == 'user.index' %}
-                            <div class="col-6 h3">  {{ title }} </div>
-                            <div class="col-6 text-self-end text-end">
-                                {% if navigation %}
-                                    {% for nav in navigation %}
-                                        <a href="{{ nav.link }}">{{ nav.text | safe }}</a>
-                                        {% if not loop.last %} | {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        --}}
-
                         <div class="col-12">
+
+                            @if (Route::is('admin.*'))
+                                <h3 class="text-center  pb-3"> {{ $title ?? "" }} </h3>
+                            @endif
+
                             @section("content")
                             @show
                         </div>            

@@ -30,41 +30,6 @@ class IndexController extends Controller
 
     public function post(Request $request, FormBuilder $formBuilder, LangCode $langCode, Post $post)
     {
-        if ($request->isMethod('post')) {
-            $form = $formBuilder->create(CommentForm::class);
-
-            $validator = Validator::make($request->all(), [
-                'parent_id' => 'nullable|exists:comments,id',
-                'name' => 'sometimes|required|min:2',
-                'email' => 'sometimes|required|email',
-                'comment' => 'required|min:5',
-            ]);
-
-            if ($validator->fails()) {
-                return back()->withErrors($validator);
-            }
-
-            $validated = $validator->validated();
-
-            $obj = new Comment();
-            $obj->comment = $validated['comment'];
-            $obj->post_id = $post->id;
-            $obj->parent_id = $validated['parent_id'];
-            $obj->active = true;
-
-            if ($request->user())
-                $obj->user_id = $request->user()->id;
-            else {
-                $obj->name = $validated['name'];
-                $obj->email = $validated['email'];
-            }
-
-            $obj->save();
-            return back()->with('messages', [
-                ['sucess', __('Comment saved successfully')],
-            ]);
-        }
-
         $data = [];
         $data['title'] = $post->title;
         $data['row'] = $post;
@@ -72,6 +37,41 @@ class IndexController extends Controller
 
         return view('index.post', $data);
     }
+
+    public function storeComment(Request $request, LangCode $langCode, Post $post)
+    {
+        $validator = Validator::make($request->all(), [
+            'parent_id' => 'nullable|exists:comments,id',
+            'name' => 'sometimes|required|min:2',
+            'email' => 'sometimes|required|email',
+            'comment' => 'required|min:5',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $validated = $validator->validated();
+
+        $obj = new Comment();
+        $obj->comment = $validated['comment'];
+        $obj->post_id = $post->id;
+        $obj->parent_id = $validated['parent_id'];
+        $obj->active = false;
+
+        if ($request->user())
+            $obj->user_id = $request->user()->id;
+        else {
+            $obj->name = $validated['name'];
+            $obj->email = $validated['email'];
+        }
+
+        $obj->save();
+        return back()->with('messages', [
+            ['sucess', __('Comment saved successfully')],
+        ]);
+    }
+
 
     public function profile(Request $request, LangCode $langCode, User $user)
     {

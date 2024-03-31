@@ -14,19 +14,27 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $rows = User::orderBy('id', 'desc')->get();
-        return view('admin.user.index', ['rows' => $rows]);
+        $data = [];
+
+        $data['title'] = __('Users');
+        $data['rows'] =  $rows = User::orderByDesc('id')->get();
+        
+        return view('admin.user.index', $data);
     }
 
     public function edit(Request $request, FormBuilder $formBuilder, LangCode $langCode, User $user)
     {
-        $form = $formBuilder->create(EditForm::class, [
+        $data = [];
+
+        $data['title'] = __('Edit user');
+        $data['row'] = $user;
+        $data['form'] = $formBuilder->create(EditForm::class, [
             'method' => 'patch',
             'url' => route('admin.users.update', ['user' => $user]),
             'model' => $user,
         ]);
 
-        return view('admin.user.edit', ['form' => $form, 'row' => $user]);
+        return view('admin.user.edit', $data);
     }
 
     public function update(Request $request, LangCode $langCode, User $user)

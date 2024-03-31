@@ -13,7 +13,7 @@ class Comment extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function children(): HasMany
@@ -24,5 +24,11 @@ class Comment extends Model
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function avatar($size = 128): string
+    {
+        $digest = md5(strtolower($this->email));
+        return "https://www.gravatar.com/avatar/{$digest}?d=identicon&s={$size}";
     }
 }

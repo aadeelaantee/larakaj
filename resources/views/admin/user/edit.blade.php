@@ -1,6 +1,11 @@
 @extends("base")
 
 @section("content")
+
+    <div class="text-end"> 
+        <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">{{ __('Users') }}</a>
+    </div>
+
     {!! form($form) !!}
 
     <div class="mt-5">

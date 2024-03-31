@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Illuminate\Validation\Rule;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Forms\Admin\Posts\PostForm;
@@ -20,6 +21,50 @@ class PostController extends Controller
 
         return view('admin.post.index', ['rows' => $rows]);
     }
+
+    public function create(Request $request, FormBuilder $formBuilder, LangCode $langCode)
+    {
+        $data = [];
+
+        $data['title'] = __('New post');
+        $data['form'] = $formBuilder->create(PostForm::class, [
+            'method' => 'post',
+            'url' => route('admin.posts.store'),
+            'data' => [
+                'langCode' => $langCode,
+            ]
+        ]);
+
+        return view('admin.post.create', $data);
+    }
+
+    public function store(PostRequest $request, FormBuilder $formBuilder, LangCode $langCode)
+    {
+        $post = new Post();
+
+        $post->lang_code        = $langCode->name;
+        $post->user_id          = $request->user()->id;
+
+        $post->get_comment      = $request->boolean('get_comment');
+        $post->active           = $request->boolean('active');
+        $post->show_in_list     = $request->boolean('show_in_list');
+
+        $post->title            = $request->title;
+        $post->slug             = $request->slug;
+        $post->resume           = $request->resume;
+        $post->body             = $request->body;
+        $post->meta_keywords    = $request->meta_keywords;
+        $post->meta_description = $request->meta_description;
+        $post->story_id         = $request->story_id;
+        $post->author_note      = $request->author_note;
+       
+        $post->save();
+
+        return back()->with('messages', [
+            ['success',  __('Post added successfully.')],
+        ]);
+    }
+
 
     public function edit(Request $request, FormBuilder $formBuilder, LangCode $langCode, Post $post) {
         $data = [];
@@ -38,47 +83,20 @@ class PostController extends Controller
         return view('admin.post.edit', $data);
     }
 
-    public function update(Request $request, LangCode $langCode, Post $post)
+    public function update(PostRequest $request, LangCode $langCode, Post $post)
     {
-        $validated = $request->validate([
-            'get_comment'       => 'sometimes|required|boolean',
-            'active'            => 'sometimes|required|boolean',
-            'show_in_list'      => 'sometimes|required|boolean',
-            'title'             => 'required|min:2',
-            'slug'              => [
-                'required',
-                'min:2',
-                Rule::unique('posts')->where(function ($query) use ($langCode) {
-                    $query->where('lang_code', $langCode->name);
-                })->ignore($post->id),
-            ],
-            'resume'            => 'required|min:2',
-            'body'              => 'required|min:2',
-            'meta_keywords'     => 'nullable',
-            'meta_description'  => 'nullable',
-            'tags' => 'nullable',
-            'story_id' => [
-                'nullable',
-                'numeric',
-                'integer',
-                Rule::exists('stories', 'id')->where(function ($query) use ($langCode) {
-                    $query->where('lang_code', $langCode->name);
-                }),
-            ],
-            'author_note'       => 'nullable',
-        ]);
-
         $post->get_comment      = $request->boolean('get_comment');
         $post->active           = $request->boolean('active');
         $post->show_in_list     = $request->boolean('show_in_list');
-        $post->title            = $validated['title'];
-        $post->slug             = $validated['slug'];
-        $post->resume           = $validated['resume'];
-        $post->body             = $validated['body'];
-        $post->meta_keywords    = $validated['meta_keywords'];
-        $post->meta_description = $validated['meta_description'];
-        $post->story_id         = $validated['story_id'];
-        $post->author_note      = $validated['author_note'];
+
+        $post->title            = $request->title;
+        $post->slug             = $request->slug;
+        $post->resume           = $request->resume;
+        $post->body             = $request->body;
+        $post->meta_keywords    = $request->meta_keywords;
+        $post->meta_description = $request->meta_description;
+        $post->story_id         = $request->story_id;
+        $post->author_note      = $request->author_note;
        
         $post->save();
 

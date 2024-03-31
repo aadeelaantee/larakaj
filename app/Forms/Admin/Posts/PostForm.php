@@ -12,8 +12,10 @@ class PostForm extends Form
         //dd($this->data['langCode']);
         //dd(get_object_vars($this));
         $tags = [];
-        foreach ($this->model->tags as $tag)
-            $tags[] = $tag->name;
+        
+        if (is_object($this->model))
+            foreach ($this->model->tags as $tag)
+                $tags[] = $tag->name;
 
         $this
             ->add('get_comment', 'checkbox', [

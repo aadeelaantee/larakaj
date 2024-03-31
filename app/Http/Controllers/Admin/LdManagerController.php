@@ -67,6 +67,7 @@ class LdManagerController extends Controller
     {
         $data = [];
         $data['title'] = __($ldCategory->name);
+        $data['category'] = $ldCategory;
         $data['rows'] = $ldCategory->links()->orderByDesc('id')->get();
         $data['form'] = $formBuilder->create(LinkForm::class, [
             'method' => 'post',

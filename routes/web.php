@@ -74,8 +74,11 @@ Route::middleware('before.boot')->group(function () {
         |
         */
 
-        Route::match(['get', 'post'], '/post/{post:slug}', [IndexController::class, 'post'])
+        Route::get('/post/{post:slug}', [IndexController::class, 'post'])
             ->name('post');
+
+        Route::post('/post/store-comment/{post:id}', [IndexController::class, 'storeComment'])
+            ->name('store_comment');
 
         Route::get('/profile/{user:username}', [IndexController::class, 'profile'])
             ->name('profile')
@@ -139,17 +142,26 @@ Route::middleware('before.boot')->group(function () {
             	Route::get('/posts', [PostController::class, 'index'])
                     ->name('posts.index');
 
+                Route::get('/posts/create', [PostController::class, 'create'])
+                    ->name('posts.create');
+
+                Route::post('/posts', [PostController::class, 'store'])
+                    ->name('posts.store');
+
             	Route::get('/posts/{post:id}/edit', [PostController::class, 'edit'])
                     ->name('posts.edit');
 
                 Route::patch('/posts/{post:id}/update', [PostController::class, 'update'])
                     ->name('posts.update');
 
-                Route::get('/comments', [CommentController::class, 'index'])
+                Route::get('/comments/{post:id?}', [CommentController::class, 'index'])
                     ->name('comments.index');
 
                 Route::get('comments/{comment:id}/activate', [CommentController::class, 'activate'])
                     ->name('comments.activate');
+
+                Route::get('comments/{comment:id}/deactivate', [CommentController::class, 'deactivate'])
+                    ->name('comments.deactivate');
 
                 Route::get('comments/{comment:id}/delete', [CommentController::class, 'delete'])
                     ->name('comments.delete');

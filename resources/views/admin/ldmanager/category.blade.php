@@ -5,6 +5,10 @@
 @section('content')
 
 
+<div class="text-center">
+<span class="badge bg-warning fs-2">{{ $category->name }}</span>
+</div>
+
 @forelse ($rows as $row)
     @if ($loop->first)
         <table class="table mb-5">
@@ -12,7 +16,10 @@
                 <tr>
                     <td> # </td>
                     <td> {{ __('Title') }} </td>
-                    <td> </td>
+                    <td class="text-end"> 
+                        <a href="{{ route('admin.ldmanager.index') }}" class="btn btn-sm btn-primary">{{ __('Ldmanager') }}</a>
+
+                    </td>
                 </tr>
             </thead>
 
