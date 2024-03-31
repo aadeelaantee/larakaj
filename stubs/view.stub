@@ -1,0 +1,7 @@
+@extends('base')
+
+@section('title', $title)
+
+@section('content')
+
+@endsection

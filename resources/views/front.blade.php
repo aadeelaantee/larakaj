@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block styles %}    
+    <link href="{{ url_for('static', filename='css/github-markdown-light.css') }}" type="text/css" rel="stylesheet" >             
+    <link href="{{ url_for('static', filename='css/codehilite.css') }}" type="text/css" rel="stylesheet" >
+    
+    {% if g.lang_code == 'fa' %}
+        <link href="{{ url_for('static', filename='css/admonition_fa.css') }}" type="text/css" rel="stylesheet" >
+    {% else %}
+        <link href="{{ url_for('static', filename='css/admonition.css') }}" type="text/css" rel="stylesheet" >
+    {% endif %}       
+    <link href="{{ url_for('static', filename='css/keys.css') }}" type="text/css" rel="stylesheet" >
+    {{ super() }}
+{% endblock %}
+
+{% block meta %}
+    {% if request.endpoint == 'user.index.post' %}
+        <meta name="description" content="{{ post.meta_description or '' }}">
+        {% if post.meta_keywords %}
+        <meta name="keywords" content="{{ post.meta_keywords.replace('+', ',') }}">
+        {% endif %}
+    {% else %}
+        {{ super() }}        
+    {% endif %}      
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    
+    {% include 'user/utilities/stat.html' ignore missing %}
+{% endblock %}
