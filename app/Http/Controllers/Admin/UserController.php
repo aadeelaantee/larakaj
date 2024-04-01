@@ -35,8 +35,14 @@ class UserController extends Controller
         ]);
 
         $data['navigation'] = [
-            [__('Users'), route('admin.users.index')],
-            [__('Change user password'), route('admin.users.password', ['user' => $user])],
+            [
+                __('Users'),
+                route('admin.users.index'),
+            ],
+            [
+                __('Change user password') . ' ' . $user->username,
+                route('admin.users.password', ['user' => $user]),
+            ]
         ];
 
         return view('admin.user.edit', $data);
@@ -86,8 +92,14 @@ class UserController extends Controller
         ]);
 
         $data['navigation'] = [
-            [__('Users'), route('admin.users.index')],
-            [__('Edit user'), route('admin.users.edit', ['user' => $user])],
+            [
+                __('Users'),
+                route('admin.users.index'),
+            ],
+            [
+                __('Edit user') . ' ' . $user->username,
+                route('admin.users.edit', ['user' => $user]),
+            ],
         ];
 
         return view('admin.user.password', $data);

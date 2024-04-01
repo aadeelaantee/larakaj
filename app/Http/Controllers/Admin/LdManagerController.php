@@ -66,7 +66,7 @@ class LdManagerController extends Controller
     public function category(Request $request, FormBuilder $formBuilder, LangCode $langCode, LinkdumpCategory $ldCategory)
     {
         $data = [];
-        $data['title'] = __($ldCategory->name);
+        $data['title'] = _('Links of') . ' ' .  $ldCategory->name;
         $data['category'] = $ldCategory;
         $data['rows'] = $ldCategory->links()->orderByDesc('id')->get();
         $data['form'] = $formBuilder->create(LinkForm::class, [
@@ -76,7 +76,10 @@ class LdManagerController extends Controller
 
 
         $data['navigation'] = [
-            [__('Linkdumps'), route('admin.ldmanager.index')],
+            [
+                __('Linkdumps'),
+                route('admin.ldmanager.index'),
+            ],
         ];
 
         return view('admin.ldmanager.category', $data);
@@ -126,8 +129,14 @@ class LdManagerController extends Controller
         ]);
 
         $data['navigation'] = [
-            [__('Linkdumps'), route('admin.ldmanager.index')],
-            [$ldLink->category->name, route('admin.ldmanager.category', ['ldCategory' => $ldLink->category])],
+            [
+                __('Linkdumps'),
+                route('admin.ldmanager.index'),
+            ],
+            [
+                __('Links of') . ' ' . $ldLink->category->name,
+                route('admin.ldmanager.category', ['ldCategory' => $ldLink->category]),
+            ],
         ];
 
         return view('admin.ldmanager.edit_link', $data);
@@ -157,7 +166,7 @@ class LdManagerController extends Controller
     public function editCategory(Request $request, FormBuilder $formBuilder, LangCode $langCode, LinkdumpCategory $ldCategory)
     {
         $data = [];
-        $data['title'] = __($ldCategory->name);
+        $data['title'] = $ldCategory->name;
         $data['form'] = $formBuilder->create(CategoryForm::class, [
             'method' => 'patch',
             'url' => route('admin.ldmanager.update_category', ['ldCategory' => $ldCategory]),
@@ -165,8 +174,14 @@ class LdManagerController extends Controller
         ]);
 
         $data['navigation'] = [
-            [__('Linkdumps'), route('admin.ldmanager.index')],
-            [__('Links'), route('admin.ldmanager.category', ['ldCategory' => $ldCategory])],
+            [
+                __('Linkdumps'),
+                route('admin.ldmanager.index'),
+            ],
+            [
+                __('Links of') . ' ' . $ldCategory->name,
+                route('admin.ldmanager.category', ['ldCategory' => $ldCategory]),
+            ],
         ];
 
         return view('admin.ldmanager.edit_category', $data);
