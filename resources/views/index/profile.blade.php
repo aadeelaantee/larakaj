@@ -19,12 +19,12 @@
                     @if ($user->is(auth()->user()))
                         <a 
                             class="btn btn-outline-primary btn-sm"
-                            href="{{-- route('user.index.edit_profile', ['lang_code' => 'fa',username=user.username) --}}">{{ __('Edit profile') }}</a> 
+                            href="{{ route('edit_profile', ['user' => $user]) }}">{{ __('Edit profile') }}</a> 
                     @endif
                     
                     @auth
                         @if ($user->isAdministrator()) 
-                            <a class="btn btn-outline-danger btn-sm" href="{{-- url_for('admin.users.edit', id=user.id) --}}">{{ __('Edit profile as Admin') }}</a> 
+                            <a class="btn btn-outline-danger btn-sm" href="{{ route('admin.users.edit', ['user' => $user]) }}">{{ __('Edit profile as Admin') }}</a> 
                         @endif
                     @endauth
                 </div>            

@@ -57,7 +57,15 @@
 
                 @php
                 $routeName = request()->route()->getName();
-                $hasSideBar = in_array($routeName, ['root', 'home', 'tag', 'profile', 'author', 'post']) ? true : false;
+                $hasSideBar = in_array($routeName, [
+                    'root',
+                    'home',
+                    'tag',
+                    'profile',
+                    'edit_profile',
+                    'author',
+                    'post',
+                ]) ? true : false;
                 @endphp
 
                 @auth
@@ -193,10 +201,9 @@
                         <div class="col-12">
 
                             @if (Route::is('admin.*'))
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <div class="text-center col-md-4 h4 text-muted">{{ $title ?? "" }}</div>
-                                    <div class="text-end col-md-4">
+                                <div class="row mb-3">
+                                    <div class="text-start col-md-4 h4 text-muted">{{ $title ?? "" }}</div>
+                                    <div class="text-end col-md-8">
                                         @if (isset($navigation))
                                             @foreach ($navigation as $nav)
                                                 <a href="{!! $nav[1] !!}" class="btn btn-sm btn-primary">

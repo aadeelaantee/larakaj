@@ -11,7 +11,8 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\LangCode;
-use App\Forms\CommentForm;
+use App\Forms\Front\Index\CommentForm;
+use App\Forms\Front\Index\ProfileForm;
 
 class IndexController extends Controller
 {
@@ -80,6 +81,51 @@ class IndexController extends Controller
         $data['user'] = $user;
 
         return view('index.profile', $data);
+    }
+
+    public function editProfile(Request $request, FormBuilder $formBuilder, LangCode $langCode, User $user)
+    {
+        $data = [];
+        $data['title'] = __('Edit profile');
+        $data['user'] = $user;
+        $data['form'] = $formBuilder->create(ProfileForm::class, [
+            'url' => route('update_profile', ['user' => $user]),
+            'method' => 'patch',
+            'model' => $user,
+        ]);
+
+        return view('index.edit_profile', $data);
+    }
+
+    public function updateProfile(Request $request, LangCode $langCode, User $user)
+    {
+        $validated = $request->validate([
+            'name'      => 'required|min:2',
+            'email'     => 'required|email',
+            'twitter'   => 'nullable|min:5',
+            'facebook'  => 'nullable|min:5',
+            'linkedin'  => 'nullable|min:5',
+            'instagram' => 'nullable|min:5',
+            'github'    => 'nullable|min:5',
+            'youtube'   => 'nullable|min:5',
+            'about'     => 'nullable|min:2',
+        ]);
+
+        $user->name      = $validated['name'];
+        $user->email     = $validated['email'];
+        $user->twitter   = $validated['twitter'];
+        $user->facebook  = $validated['facebook'];
+        $user->linkedin  = $validated['linkedin'];
+        $user->instagram = $validated['instagram'];
+        $user->github    = $validated['github'];
+        $user->youtube   = $validated['youtube'];
+        $user->about     = $validated['about'];
+
+        $user->save();
+
+        return back()->with('messages', [
+            ['success', __('User editted successfully')],
+        ]);
     }
 
     public function tag(Request $request, LangCode $langCode, Tag $tag)

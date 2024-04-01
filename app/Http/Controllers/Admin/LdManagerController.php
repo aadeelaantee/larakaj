@@ -21,7 +21,7 @@ class LdManagerController extends Controller
     public function index(Request $request, FormBuilder $formBuilder, LangCode $langCode)
     {
         $data = [];
-        $data['title'] = __('Linkdump manager');
+        $data['title'] = __('Linkdumps');
 
         $data['rows'] = LinkdumpCategory::whereLangCode($langCode->name)
             ->orderBy('id', 'desc')
@@ -80,6 +80,10 @@ class LdManagerController extends Controller
                 __('Linkdumps'),
                 route('admin.ldmanager.index'),
             ],
+            [
+                __('Edit') . ' ' . $ldCategory->name,
+                route('admin.ldmanager.edit_category', ['ldCategory' => $ldCategory]),
+            ],
         ];
 
         return view('admin.ldmanager.category', $data);
@@ -135,6 +139,10 @@ class LdManagerController extends Controller
             ],
             [
                 __('Links of') . ' ' . $ldLink->category->name,
+                route('admin.ldmanager.category', ['ldCategory' => $ldLink->category]),
+            ],
+            [
+                __('Edit') . ' ' . $ldLink->category->name,
                 route('admin.ldmanager.category', ['ldCategory' => $ldLink->category]),
             ],
         ];

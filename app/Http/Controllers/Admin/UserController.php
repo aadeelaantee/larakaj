@@ -85,7 +85,7 @@ class UserController extends Controller
     public function password(Request $request, FormBuilder $formBuilder, LangCode $langCode, User $user)
     {
         $data = [];
-        $data['title'] = __('Change user password');
+        $data['title'] = __('Change user password') . ' ' . $user->username;
         $data['form'] = $formBuilder->create(PasswordForm::class, [
             'url' => route('admin.users.update_password', ['user' => $user]),
             'method' => 'patch',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms;
+namespace App\Forms\Front\Index;
 
 use Kris\LaravelFormBuilder\Form;
 

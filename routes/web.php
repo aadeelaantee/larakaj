@@ -102,6 +102,15 @@ Route::middleware('before.boot')->group(function () {
         */
 
         Route::middleware(['auth'])->group(function () {
+            
+            Route::get('/edit-profile/{user:username}', [IndexController::class, 'editProfile'])
+                ->name('edit_profile')
+                ->withoutScopedBindings();
+
+            Route::patch('/update-profile/{user:username}', [IndexController::class, 'updateProfile'])
+                ->name('update_profile')
+                ->withoutScopedBindings();
+
             Route::get('/logout', [AuthController::class, 'logout'])
                 ->name('logout');
 

@@ -19,10 +19,9 @@
 
     <tr>
         <td> {{ $loop->iteration }} </td>
-        <td> {{ $row->name }} </td>
+        <td> <a href="{{ route('admin.ldmanager.category', ['ldCategory' => $row]) }}"> {{ $row->name }} </a> </td>
         <td>
             <span> <a href="{{ route('admin.ldmanager.edit_category', ['ldCategory' => $row]) }}">🖉</a></span>
-            <span> <a href="{{ route('admin.ldmanager.category', ['ldCategory' => $row]) }}">⚙</a> </span>
             <span class="badge bg-warning">{{ $row->links()->count() }} {{ trans_choice('link|links', $row->links()->count() ) }} </a> </span>
             @if ($row->integrated_with_template)
                 <span class="badge bg-danger">{{ __('Integrated with template') }}</span>

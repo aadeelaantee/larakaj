@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Story;
 use App\Models\LangCode;
 use Kris\LaravelFormBuilder\FormBuilder;
-use App\Forms\StoryForm;
+use App\Forms\Admin\Story\StoryForm;
 use Illuminate\Validation\Rule;
 
 class StoryController extends Controller
