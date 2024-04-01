@@ -3,10 +3,10 @@
 return [
 
     'defaults' => [
-        'wrapper_class'       => 'form-group mb-3', // added mb-3
+        'wrapper_class'       => 'form-group', // added mb-3
         'wrapper_error_class' => '',
         'label_class'         => '',
-        'field_class'         => 'form-control',
+        'field_class'         => 'form-control  mb-3 mt-1',
         'field_error_class'   => 'is-invalid',
         'help_block_class'    => 'form-text text-muted',
         'error_class'         => 'invalid-feedback',
@@ -17,7 +17,7 @@ return [
         ],
 
         'checkbox' => [
-            'wrapper_class' => 'form-check',
+            'wrapper_class' => 'form-check mb-1 mt-1',
             'field_class'   => 'form-check-input',
             'label_class'   => 'form-check-label',
 
@@ -51,7 +51,7 @@ return [
         ],
 
         'select' => [
-            'field_class'   => 'form-select',
+            'field_class'   => 'form-select  mb-3 mt-1',
         ],
     ],
 

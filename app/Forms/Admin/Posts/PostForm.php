@@ -28,6 +28,9 @@ class PostForm extends Form
 
             ->add('show_in_list', 'checkbox', [
                 'label' => __('Show in list'),
+                'wrapper' => [
+                    'class' => 'form-check mb-3',
+                ],
             ])
 
             ->add('title', 'text', [
