@@ -34,6 +34,11 @@ class UserController extends Controller
             'model' => $user,
         ]);
 
+        $data['navigation'] = [
+            [__('Users'), route('admin.users.index')],
+            [__('Change user password'), route('admin.users.password', ['user' => $user])],
+        ];
+
         return view('admin.user.edit', $data);
     }
 
@@ -79,6 +84,11 @@ class UserController extends Controller
             'url' => route('admin.users.update_password', ['user' => $user]),
             'method' => 'patch',
         ]);
+
+        $data['navigation'] = [
+            [__('Users'), route('admin.users.index')],
+            [__('Edit user'), route('admin.users.edit', ['user' => $user])],
+        ];
 
         return view('admin.user.password', $data);
     }

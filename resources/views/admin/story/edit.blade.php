@@ -2,8 +2,6 @@
 
 @section("content")
 
-<div class="text-end"><a href="{{ route('admin.stories.index') }}" class="btn btn-sm btn-primary">{{ __('Stories') }}</a> </div>
-
 {!! form($form) !!}
 
 @forelse ($row->posts as $post)

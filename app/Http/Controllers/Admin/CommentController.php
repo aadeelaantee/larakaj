@@ -12,15 +12,16 @@ class CommentController extends Controller
 {
     public function index(Request $request, LangCode $langCode, Post $post = null)
     {
-        $data = [];
-        $data['title'] = __('Comments');
+        $data = [];        
         $data['post'] = $post;
 
         if (! $post) {
+            $data['title'] = __('Inactive comments');
             $data['comments'] = Comment::whereHas('post', function ($query) use ($langCode) {
                 return $query->where('lang_code', $langCode->name);
             })->whereActive(false)->get();
         } else {
+            $data['title'] = __('Comments for') . ' ' . $post->title;
             $data['comments'] = $post->comments;
         }
 

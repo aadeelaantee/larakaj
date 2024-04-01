@@ -46,6 +46,11 @@ class LangCodeController extends Controller
     {
         $data = [];
         $data['title'] = __('Edit language code');
+        
+        $data['navigation'] = [
+            [__('Lang codes'), route('admin.lang_codes.index')],
+        ];
+
         $data['form'] = $formBuilder->create(EditForm::class, [
             'method' => 'patch',
             'url' => route('admin.lang_codes.update', ['lc' => $lc]),

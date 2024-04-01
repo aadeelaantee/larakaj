@@ -14,24 +14,35 @@ class StoryController extends Controller
 {
     public function index(Request $request, FormBuilder $formBuilder, LangCode $langCode, )
     {
-        $form = $formBuilder->create(StoryForm::class, [
+        $data = [];
+        $data['title'] = __('Stories');
+
+        $data['form'] = $formBuilder->create(StoryForm::class, [
             'method' => 'POST',
             'url' => route('admin.stories.store'),
         ]);
 
-        $rows = Story::whereLangCode($langCode->name)->orderBy('id', 'desc')->get();
-        return view('admin.story.index', ['rows' => $rows, 'form' => $form]);
+        $data['rows'] = Story::whereLangCode($langCode->name)->orderBy('id', 'desc')->get();
+        return view('admin.story.index', $data);
     }
 
     public function edit(Request $request, FormBuilder $formBuilder, LangCode $langCode, Story $story)
     {
-        $form = $formBuilder->create(StoryForm::class, [
+        $data = [];
+        $data['title'] = __('Edit story');
+        $data['row'] = $story;
+
+        $data['form'] = $formBuilder->create(StoryForm::class, [
             'method' => 'patch',
             'url' => route('admin.stories.update', ['story' => $story]),
             'model' => $story,
         ]);
 
-        return view('admin.story.edit', ['form' => $form, 'row' => $story]);
+        $data['navigation'] = [
+            [__('Stories'), route('admin.stories.index')],
+        ];
+
+        return view('admin.story.edit', $data);
     }
 
     public function store(Request $request)

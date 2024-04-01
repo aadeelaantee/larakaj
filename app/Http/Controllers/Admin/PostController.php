@@ -15,11 +15,18 @@ class PostController extends Controller
 {
     public function index(Request $request, LangCode $langCode)
     {
-        $rows = Post::orderBy('id', 'desc')
+        $data = [];
+        $data['title'] = __('Posts');
+
+        $data['rows'] = Post::orderBy('id', 'desc')
             ->whereLangCode($langCode->name)
             ->get();
 
-        return view('admin.post.index', ['rows' => $rows]);
+        $data['navigation'] = [
+            [__('New post'), route('admin.posts.create')],
+        ];
+
+        return view('admin.post.index', $data);
     }
 
     public function create(Request $request, FormBuilder $formBuilder, LangCode $langCode)
@@ -34,6 +41,10 @@ class PostController extends Controller
                 'langCode' => $langCode,
             ]
         ]);
+
+        $data['navigation'] = [
+            [__('Posts'), route('admin.posts.index')],
+        ];
 
         return view('admin.post.create', $data);
     }
@@ -71,6 +82,7 @@ class PostController extends Controller
 
         $data['title'] = __('Edit post');
         $data['row'] = $post;
+        
         $data['form'] = $formBuilder->create(PostForm::class, [
             'method' => 'patch',
             'url' => route('admin.posts.update', ['post' => $post]),
@@ -79,6 +91,10 @@ class PostController extends Controller
                 'langCode' => $langCode,
             ]
         ]);
+
+        $data['navigation'] = [
+            [__('Posts'), route('admin.posts.index')],
+        ];
 
         return view('admin.post.edit', $data);
     }

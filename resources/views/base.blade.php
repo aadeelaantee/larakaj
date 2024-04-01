@@ -193,7 +193,19 @@
                         <div class="col-12">
 
                             @if (Route::is('admin.*'))
-                                <h3 class="text-center  pb-3"> {{ $title ?? "" }} </h3>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="text-center col-md-4 h4 text-muted">{{ $title ?? "" }}</div>
+                                    <div class="text-end col-md-4">
+                                        @if (isset($navigation))
+                                            @foreach ($navigation as $nav)
+                                                <a href="{!! $nav[1] !!}" class="btn btn-sm btn-primary">
+                                                    {{ $nav[0] }}
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
                             @endif
 
                             @section("content")

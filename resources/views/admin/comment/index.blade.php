@@ -4,10 +4,6 @@
 
 @section('content')
    
-    @if ($post)
-        <div class="text-center"><span class="badge bg-warning fs-4">{{ $post->title }}</span></div>
-    @endif
-
     @forelse ($comments as $comment)
             <div @class([
                     "hover-overlay p-3 mt-3 mb-3 border",

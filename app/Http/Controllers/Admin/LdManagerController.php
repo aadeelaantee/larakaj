@@ -74,6 +74,11 @@ class LdManagerController extends Controller
             'url' => route('admin.ldmanager.store_link', ['ldCategory' => $ldCategory]),
         ]);
 
+
+        $data['navigation'] = [
+            [__('Linkdumps'), route('admin.ldmanager.index')],
+        ];
+
         return view('admin.ldmanager.category', $data);
     }
 
@@ -120,6 +125,11 @@ class LdManagerController extends Controller
             'model' => $ldLink,
         ]);
 
+        $data['navigation'] = [
+            [__('Linkdumps'), route('admin.ldmanager.index')],
+            [$ldLink->category->name, route('admin.ldmanager.category', ['ldCategory' => $ldLink->category])],
+        ];
+
         return view('admin.ldmanager.edit_link', $data);
     }
 
@@ -153,6 +163,11 @@ class LdManagerController extends Controller
             'url' => route('admin.ldmanager.update_category', ['ldCategory' => $ldCategory]),
             'model' => $ldCategory,
         ]);
+
+        $data['navigation'] = [
+            [__('Linkdumps'), route('admin.ldmanager.index')],
+            [__('Links'), route('admin.ldmanager.category', ['ldCategory' => $ldCategory])],
+        ];
 
         return view('admin.ldmanager.edit_category', $data);
     }

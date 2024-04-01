@@ -11,9 +11,8 @@
                     <td> {{ __('Title') }} </td>
                     <td> </td>
                     <td> </td>
-                    <td colspan="2" class="text-end">
-                        <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">{{ __('New post') }}</a>
-                    </td>                    
+                    <td> </td>
+                    <td> </td>                    
                 </tr>
             </thead>
 
