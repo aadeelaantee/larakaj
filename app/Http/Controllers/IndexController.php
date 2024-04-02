@@ -100,26 +100,27 @@ class IndexController extends Controller
     public function updateProfile(Request $request, LangCode $langCode, User $user)
     {
         $validated = $request->validate([
-            'name'      => 'required|min:2',
-            'email'     => 'required|email',
-            'twitter'   => 'nullable|min:5',
-            'facebook'  => 'nullable|min:5',
-            'linkedin'  => 'nullable|min:5',
-            'instagram' => 'nullable|min:5',
-            'github'    => 'nullable|min:5',
-            'youtube'   => 'nullable|min:5',
-            'about'     => 'nullable|min:2',
+            'name'        => 'required|min:2',
+            'email'       => 'required|email',
+            'twitter'     => 'nullable|min:5',
+            'facebook'    => 'nullable|min:5',
+            'linkedin'    => 'nullable|min:5',
+            'instagram'   => 'nullable|min:5',
+            'github'      => 'nullable|min:5',
+            'youtube'     => 'nullable|min:5',
+            'about'       => 'nullable|min:2',
         ]);
 
-        $user->name      = $validated['name'];
-        $user->email     = $validated['email'];
-        $user->twitter   = $validated['twitter'];
-        $user->facebook  = $validated['facebook'];
-        $user->linkedin  = $validated['linkedin'];
-        $user->instagram = $validated['instagram'];
-        $user->github    = $validated['github'];
-        $user->youtube   = $validated['youtube'];
-        $user->about     = $validated['about'];
+        $user->name       = $validated['name'];
+        $user->email      = $validated['email'];
+        $user->twitter    = $validated['twitter'];
+        $user->facebook   = $validated['facebook'];
+        $user->linkedin   = $validated['linkedin'];
+        $user->instagram  = $validated['instagram'];
+        $user->github     = $validated['github'];
+        $user->youtube    = $validated['youtube'];
+        $user->about      = $validated['about'];
+        $user->about_html = app('commonMark')->convert($user->about);
 
         $user->save();
 
