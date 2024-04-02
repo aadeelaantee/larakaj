@@ -1,4 +1,4 @@
-@foreach (\App\Models\LinkdumpCategory::whereIntegratedWithTemplate(false)->whereLangCode('fa')->get() as $category)
+@foreach (\App\Models\LinkdumpCategory::whereIntegratedWithTemplate(false)->whereLangCode($langCode->name)->get() as $category)
     @if ($loop->first)
         <div class="row border-top pt-3 rtl">
     @endif

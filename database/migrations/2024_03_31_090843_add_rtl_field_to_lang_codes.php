@@ -14,6 +14,28 @@ return new class extends Migration
         Schema::table('lang_codes', function (Blueprint $table) {
             $table->boolean('rtl')->after('default')->default(0)->comment('Language is from right to left?');
         });
+
+        DB::table('lang_codes')->insert([
+            'name' => 'en',
+            'rtl' => false,
+            'default' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('lang_codes')->insert([
+            'name' => 'fa',
+            'rtl' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('lang_codes')->insert([
+            'name' => 'es',
+            'rtl' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
