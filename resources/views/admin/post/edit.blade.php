@@ -2,7 +2,14 @@
 
 @section("content")
 
+@if ($row->locked)
+    <div class="alert alert-danger">
+        {{ __('Post is locked!') }}
+    </div>
+@endif
+
 {!! form($form) !!}
+
 
 @if ($row->story)
     <h3> {{ $row->story->name }} </h3> <hr>

@@ -163,6 +163,9 @@ Route::middleware('before.boot')->group(function () {
                 Route::patch('/posts/{post:id}/update', [PostController::class, 'update'])
                     ->name('posts.update');
 
+                Route::get('/posts/{post:id}/change-lock', [PostController::class, 'changeLock'])
+                    ->name('posts.change_lock');
+
                 Route::get('/comments/{post:id?}', [CommentController::class, 'index'])
                     ->name('comments.index');
 

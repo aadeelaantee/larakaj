@@ -98,13 +98,36 @@ class PostController extends Controller
         $data['navigation'] = [
             [__('Posts'), route('admin.posts.index')],
             [__('New post'), route('admin.posts.create')],
+            [ $post->locked ? __('Unlock') : __('Lock'), route('admin.posts.change_lock', ['post' => $post])],
         ];
 
         return view('admin.post.edit', $data);
     }
 
+    public function changeLock(Request $request, LangCode $langCode, Post $post)
+    {
+        if ($post->locked) {
+            $msg = __('Post unlocked successfully');
+        } else {
+            $msg = __('Post locked successfully');
+        }
+
+        $post->locked = ! $post->locked;
+        $post->save();
+
+        return back()->with('messages', [
+            ['success', $msg],
+        ]);
+
+    }
+
     public function update(PostRequest $request, LangCode $langCode, Post $post)
     {
+        if ($post->locked)
+            return back()->with('messages', [
+                ['danger', __('Post is locked')],
+            ]);
+
         $post->get_comment      = $request->boolean('get_comment');
         $post->active           = $request->boolean('active');
         $post->show_in_list     = $request->boolean('show_in_list');
@@ -117,7 +140,9 @@ class PostController extends Controller
         $post->meta_description = $request->meta_description;
         $post->story_id         = $request->story_id;
         $post->author_note      = $request->author_note;
-       
+        
+        $post->body_html = app('commonMark')->convert($post->body);
+
         $post->save();
 
         $this->setTags($request->tags, $langCode, $post);

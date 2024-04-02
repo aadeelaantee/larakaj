@@ -12,6 +12,7 @@
                     <td> </td>
                     <td> </td>
                     <td> </td>
+                    <td> </td>
                     <td> </td>                    
                 </tr>
             </thead>
@@ -39,6 +40,11 @@
                 </a>
             @endif
 
+        </td>
+        <td> 
+            @if ($row->locked)
+                <span class="badge bg-warning">{{ __('locked') }}</span>
+            @endif
         </td>
         <td> <a href="{{ route('admin.posts.edit', ['post' => $row]) }}">🖉</a></td>
     </tr>
