@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Forms\Admin\Posts\PostForm;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\LangCode;
 
 class PostController extends Controller
@@ -71,6 +72,8 @@ class PostController extends Controller
        
         $post->save();
 
+        $this->setTags($request->tags, $langCode, $post);
+
         return back()->with('messages', [
             ['success',  __('Post added successfully.')],
         ]);
@@ -94,6 +97,7 @@ class PostController extends Controller
 
         $data['navigation'] = [
             [__('Posts'), route('admin.posts.index')],
+            [__('New post'), route('admin.posts.create')],
         ];
 
         return view('admin.post.edit', $data);
@@ -116,8 +120,39 @@ class PostController extends Controller
        
         $post->save();
 
+        $this->setTags($request->tags, $langCode, $post);
+
         return back()->with('messages', [
             ['success',  __('Post editted successfully.')],
         ]);
+    }
+
+    private function setTags(?string $tags, LangCode $langCode, Post $post)
+    {
+        if (blank($tags)) {
+            $post->tags()->detach();
+            return;
+        }
+
+        $tags = explode('+',$tags);
+
+        if (count($tags)) {
+            $tags = array_unique(array_map('trim', $tags));
+            $existedTags = Tag::whereLangCode($langCode->name)
+                ->whereIn('name', $tags)
+                ->pluck('name', 'id')
+                ->toArray();
+
+            $addedIds = [];
+            foreach (array_diff($tags, $existedTags) as $tag) {
+                $addedIds[] = Tag::create([
+                    'name' => $tag,
+                    'lang_code' => $langCode->name,
+                ])->id;
+            }
+            
+            $tagsIds = array_merge(array_keys($existedTags), $addedIds);
+            $post->tags()->sync($tagsIds);
+        }
     }
 }
