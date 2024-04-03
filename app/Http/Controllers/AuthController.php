@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Kris\LaravelFormBuilder\FormBuilder;
+use App\Forms\Front\Auth\LoginForm;
+use App\Forms\Front\Auth\RegisterForm;
 use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request, FormBuilder $formBuilder)
     {
-
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'email' => 'required',
@@ -38,12 +40,16 @@ class AuthController extends Controller
 
         $data = [];
         $data['title'] = __('Login');
+        $data['form'] = $formBuilder->create(LoginForm::class, [
+            'url' => route('login'),
+            'method' => 'post',
+        ]);
 
         return view('auth.login', $data);
     }
 
 
-    public function register(Request $request)
+    public function register(Request $request, FormBuilder $formBuilder)
     {
         if ($request->isMethod('post')) {
             $validated = $request->validate([
@@ -54,6 +60,7 @@ class AuthController extends Controller
             ]);
 
             $user = new User();
+            $user->username = $validated['username'];
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->password = Hash::make($validated['password']);
@@ -68,7 +75,10 @@ class AuthController extends Controller
 
         $data = [];
         $data['title'] = __('Register');
-
+        $data['form'] = $formBuilder->create(RegisterForm::class, [
+            'url' => route('register'),
+            'method' => 'post',
+        ]);
         return view('auth.register', $data);
     }
 

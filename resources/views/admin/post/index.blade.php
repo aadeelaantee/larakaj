@@ -11,8 +11,7 @@
                     <td> {{ __('Title') }} </td>
                     <td> </td>
                     <td> </td>
-                    <td> </td>
-                    <td> </td>                                    
+                    <td> </td>                                   
                 </tr>
             </thead>
 
@@ -21,7 +20,12 @@
 
     <tr>
         <td> {{ $loop->iteration }} </td>
-        <td> <a href="{{ route('admin.posts.edit', ['post' => $row]) }}">{{ $row->title }}</a></td>
+        <td> 
+            <a href="{{ route('admin.posts.edit', ['post' => $row]) }}">{{ $row->title }}</a>
+            @if ($row->locked)
+                <span class="badge bg-warning">{{ __('locked') }}</span>
+            @endif
+        </td>
         <td> {{ $row->active       ? __('Active')  : __('Inactive')    }} </td>
         <td> {{ $row->show_in_list ? __('In list') : __('Not in list') }}</td>
         <td> 
@@ -37,12 +41,6 @@
 
             @if ($commentCount)
                 </a>
-            @endif
-
-        </td>
-        <td> 
-            @if ($row->locked)
-                <span class="badge bg-warning">{{ __('locked') }}</span>
             @endif
         </td>
     </tr>

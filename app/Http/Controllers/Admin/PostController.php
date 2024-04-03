@@ -99,6 +99,7 @@ class PostController extends Controller
             [__('Posts'), route('admin.posts.index')],
             [__('New post'), route('admin.posts.create')],
             [ $post->locked ? __('Unlock') : __('Lock'), route('admin.posts.change_lock', ['post' => $post])],
+            [__('View post'), route('post', ['post' => $post])],
         ];
 
         return view('admin.post.edit', $data);
