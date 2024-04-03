@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->timestamp('date_created')->nullable()->change();
-            $table->timestamp('updated_at');
-            $table->timestamp('deleted_at');
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             $table->renameColumn('date_created', 'created_at');
         });
     }
