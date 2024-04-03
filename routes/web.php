@@ -144,8 +144,11 @@ Route::middleware('before.boot')->group(function () {
             	Route::get('/stories/{story:id}/edit', [StoryController::class, 'edit'])
                     ->name('stories.edit');
 
-                Route::patch('/stories/{story}', [StoryController::class, 'update'])
+                Route::patch('/stories/{story:id}', [StoryController::class, 'update'])
                     ->name('stories.update');
+
+                Route::delete('/stories/{story:id}', [StoryController::class, 'destroy'])
+                    ->name('stories.destroy');
 
             	Route::get('/posts', [PostController::class, 'index'])
                     ->name('posts.index');

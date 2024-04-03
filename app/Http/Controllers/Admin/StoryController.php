@@ -45,12 +45,9 @@ class StoryController extends Controller
         return view('admin.story.edit', $data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, LangCode $langCode)
     {
-        $langCode = $request->lang_code;
-
         $validated = $request->validate([
-            'lang_code' => 'bail|required|exists:lang_codes,name',
             'name' => [
                 'required',
                 'min:2',
@@ -64,7 +61,7 @@ class StoryController extends Controller
 
         $obj = new Story();
         $obj->name = $validated['name'];
-        $obj->lang_code = $validated['lang_code'];
+        $obj->lang_code = $langCode->name;
         $obj->save();
 
         return back()->with('messages', [
@@ -93,6 +90,21 @@ class StoryController extends Controller
 
         return back()->with('messages', [
             ['success', __('Story editted successfully')],
+        ]);
+    }
+
+    public function destroy(Request $request, LangCode $langCode, Story $story)
+    {
+        /**
+         * This story has posts and we cannot delete it.
+         */ 
+        if ($story->posts()->count())
+            abort(404);
+
+        $story->delete();
+
+        return back()->with('messages', [
+            ['success', __('Story deleted successfully.')],
         ]);
     }
 }

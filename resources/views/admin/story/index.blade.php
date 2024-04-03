@@ -19,9 +19,24 @@
     <tr>
         <td> {{ $loop->iteration }} </td>
         <td> {{ $row->name }} </td>
+        
         <td class="text-end">
-            <span class="badge bg-warning">{{ $row->posts()->count() }} {{ __('Posts') }}</span>
-            <span class="ps-1"><a href="{{ route('admin.stories.edit', ['story' => $row]) }}">🖉</a></span>
+            <div class="row">
+                <div class="col-9 text-end">
+                    @if (! $row->posts()->count())
+                        <form  method="post" action="{{ route('admin.stories.destroy', ['story' => $row]) }}">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="{{ __('Delete') }}" class="btn btn-sm btn-outline-danger">
+                        </form>
+                    @endif
+                </div>
+
+                <div class="col-3">
+                    <span class="badge bg-warning">{{ $row->posts()->count() }} {{ __('Posts') }}</span>
+                    <span class="ps-1"><a href="{{ route('admin.stories.edit', ['story' => $row]) }}">🖉</a></span>
+                </div>
+            </div>
         </td>
     </tr>
 
@@ -34,6 +49,8 @@
     <h1> No records </h1>
 @endforelse
 
-{!! form($form) !!}
+<div class="mt-5">
+    {!! form($form) !!}
+</div>
 
 @endsection
