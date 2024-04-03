@@ -61,6 +61,13 @@ class BeforeBoot
         App::setLocale($request->route('langCode')->name);
         // $request->route()->forgetParameter('langCode');
 
+        /**
+         * if a route is protected with 'auth' middleware then
+         * just Administrator user is allowed to access it.
+         */
+        if (in_array('auth', $request->route()->gatherMiddleware()))
+            abort_if(! $request->user()->isAdministrator(), 404);
+
         return $next($request);
     }
 }

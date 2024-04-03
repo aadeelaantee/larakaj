@@ -91,6 +91,9 @@ Route::middleware('before.boot')->group(function () {
             ->name('author')
             ->withoutScopedBindings();
 
+        Route::get('/logout', [AuthController::class, 'logout'])
+            ->name('logout');
+
         /*
         |-----------------------------------------------------------------------
         | Protected Roues
@@ -109,9 +112,6 @@ Route::middleware('before.boot')->group(function () {
             Route::patch('/update-profile/{user:username}', [IndexController::class, 'updateProfile'])
                 ->name('update_profile')
                 ->withoutScopedBindings();
-
-            Route::get('/logout', [AuthController::class, 'logout'])
-                ->name('logout');
 
             Route::get('/verification/notice', [VerificationController::class, 'notice'])
                 ->name('verification.notice');

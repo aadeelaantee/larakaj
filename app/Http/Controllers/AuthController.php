@@ -11,6 +11,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use App\Forms\Front\Auth\LoginForm;
 use App\Forms\Front\Auth\RegisterForm;
 use App\Models\User;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -64,6 +65,15 @@ class AuthController extends Controller
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->password = Hash::make($validated['password']);
+
+            if (! User::count()) {
+                $role = Role::whereName('Administrator')->firstOrFail();
+            } else {
+                $role = Role::whereName('Registered_user')->firstOrFail();
+            }
+
+            $user->role_id = $role->id;
+
             $user->save();
 
             event(new Registered($user));
