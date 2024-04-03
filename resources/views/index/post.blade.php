@@ -2,6 +2,9 @@
 
 @section('title', $title)
 
+@section('meta_keywords', str_replace('+', ',', $row->meta_keywords))
+@section('meta_description', $row->meta_description)
+
 @section('content')
 <div>
     @include('index.common_header')

@@ -6,5 +6,5 @@
 
 {!! form($form) !!}
 
-{{ __('Currently a user?') }} <a href="{{ route('login') }}">{{ __('Please login.') }}
+{{ __('Currently a user?') }} <a href="{{ route('login') }}">{{ __('Please login.') }}</a>
 @endsection

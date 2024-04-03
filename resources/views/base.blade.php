@@ -8,7 +8,7 @@
         </title>
 
         @section('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/magula.css">
 
         @if ($langCode->rtl)
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
@@ -26,11 +26,17 @@
         <link href="{{ asset('static/css/codehilite.css') }}" type="text/css" rel="stylesheet" >
         <link href="{{ asset('static/css/keys.css') }}" type="text/css" rel="stylesheet">
 
-        
-
-        
         <link rel="icon" type="image/x-icon" href="{{ asset('static/icons/favicon.png') }}">
-        @show        
+        @show
+
+        @hasSection('meta_keywords')
+            <meta name="keywords" content="@yield('meta_keywords')">
+        @endif
+
+        @hasSection('meta_description')
+            <meta name="description" content="@yield('meta_description')">
+        @endif
+
     </head>
 
     <body class="d-flex flex-column min-vh-100">
@@ -68,6 +74,9 @@
                     'author',
                     'post',
                 ]) ? true : false;
+
+                // At this momemt we want all pages have side bar.
+                $hasSideBar = true;
                 @endphp
 
                 @auth
