@@ -85,8 +85,7 @@ Route::middleware('before.boot')->group(function () {
             ->withoutScopedBindings();
 
         Route::get('/tag/{tag:name}', [IndexController::class, 'tag'])
-            ->name('tag')
-            ->withoutScopedBindings();
+            ->name('tag');
 
         Route::get('/author/{user:username}', [IndexController::class, 'author'])
             ->name('author')

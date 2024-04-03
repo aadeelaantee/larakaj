@@ -12,7 +12,7 @@ use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkRenderer;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
-
+use ElGigi\CommonMarkEmoji\EmojiExtension;
 use League\CommonMark\MarkdownConverter;
 
 class AppServiceProvider extends ServiceProvider
@@ -77,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
             $environment->addExtension(new TableOfContentsExtension());
             $environment->addExtension(new GithubFlavoredMarkdownExtension());
             $environment->addExtension(new TableExtension());
+            $environment->addExtension(new EmojiExtension());
 
             // Instantiate the converter engine and start converting some Markdown!
             return new MarkdownConverter($environment);

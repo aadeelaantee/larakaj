@@ -161,7 +161,7 @@ class PostController extends Controller
         }
 
         $tags = explode('+',$tags);
-
+       
         if (count($tags)) {
             $tags = array_unique(array_map('trim', $tags));
             $existedTags = Tag::whereLangCode($langCode->name)

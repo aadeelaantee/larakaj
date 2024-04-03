@@ -16,6 +16,11 @@ class LangCode extends Model
         return $this->hasMany(Post::class, 'lang_code', 'name');
     }
 
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class, 'lang_code', 'name');
+    }
+
     public function stories(): HasMany
     {
         return $this->hasMany(Story::class, 'lang_code', 'name');
