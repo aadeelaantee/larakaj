@@ -155,8 +155,14 @@ class PostController extends Controller
 
     private function setTags(?string $tags, LangCode $langCode, Post $post)
     {
-        if (blank($tags)) {
+        if (blank($tags)) {            
+            $originalTags = $post->tags;
             $post->tags()->detach();
+
+            foreach ($originalTags as $t)
+                if (! $t->posts()->count())
+                    $t->delete();
+
             return;
         }
 
@@ -178,7 +184,17 @@ class PostController extends Controller
             }
             
             $tagsIds = array_merge(array_keys($existedTags), $addedIds);
+            $originalTags = $post->tags;
+
             $post->tags()->sync($tagsIds);
+
+            /**
+             * Delete orphan tags = Tags with no post
+             */
+            foreach ($originalTags as $t) {
+                if (! $t->posts()->count())
+                    $t->delete();
+            }
         }
     }
 }

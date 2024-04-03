@@ -273,7 +273,7 @@
                     <div class="card mb-3">
                         <div class="card-header">{{ __("Tags") }}</div>
                         <div class="card-body rtl">
-                            @foreach (\App\Models\Tag::whereHas('posts', function ($s) use ($langCode) { $s->where('lang_code', $langCode->name); })->get() as $tag_)
+                            @foreach (\App\Models\Tag::whereLangCode($langCode->name)->get() as $tag_)
                                 <a @class([
                                         'btn btn-sm btn-outline-primary mb-1',
                                         'active' => isset($tag) && $tag_->is($tag)
