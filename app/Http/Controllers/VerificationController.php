@@ -10,7 +10,7 @@ class VerificationController extends Controller
     public function notice(Request $request)
     {
         $data = [];
-        $data['title'] = __('Verfication notice');
+        $data['title'] = __('Verfication notice.');
 
         return view('verification.notice', $data);
     }
@@ -19,7 +19,7 @@ class VerificationController extends Controller
     {
         $request->user()->sendEmailVerificationNotification();
         return back()->with('messages', [
-            ['success', __('Verification email sent successfully')],
+            ['success', __('Verification email sent successfully.')],
         ]);
     }
 

@@ -47,7 +47,7 @@
         @method("delete")
         @csrf
 
-        <input type="submit" class="btn btn-danger" value="{{ __('Delete this category') }}">
+        <input type="submit" class="btn btn-danger" value="{{ __('Delete this category.') }}">
         </form>
     </div>
 @endif

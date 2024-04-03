@@ -55,7 +55,7 @@
     @if ($row->get_comment)
     <div class="row" dir="auto">
         <div class="col-12">
-            <p class="mt-5 text-secondary" id="comment_form"> {{ __('Leave a comment') }} </p>
+            <p class="mt-5 text-secondary" id="comment_form"> {{ __('Leave a comment.') }} </p>
             <div id="form_info"></div>
         </div>
     </div>           

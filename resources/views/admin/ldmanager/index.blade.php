@@ -41,7 +41,7 @@
     @endif
 
 @empty
-    <h3> {{ __('No records found') }} </h3>
+    <h3> {{ __('No records found.') }} </h3>
 
 
 

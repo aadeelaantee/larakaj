@@ -108,9 +108,9 @@ class PostController extends Controller
     public function changeLock(Request $request, LangCode $langCode, Post $post)
     {
         if ($post->locked) {
-            $msg = __('Post unlocked successfully');
+            $msg = __('Post unlocked successfully.');
         } else {
-            $msg = __('Post locked successfully');
+            $msg = __('Post locked successfully.');
         }
 
         $post->locked = ! $post->locked;
@@ -126,7 +126,7 @@ class PostController extends Controller
     {
         if ($post->locked)
             return back()->with('messages', [
-                ['danger', __('Post is locked')],
+                ['danger', __('Post is locked.')],
             ]);
 
         $post->get_comment      = $request->boolean('get_comment');

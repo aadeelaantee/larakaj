@@ -69,7 +69,7 @@ class IndexController extends Controller
 
         $obj->save();
         return back()->with('messages', [
-            ['success', __('Comment saved successfully')],
+            ['success', __('Comment saved successfully.')],
         ]);
     }
 
@@ -125,7 +125,7 @@ class IndexController extends Controller
         $user->save();
 
         return back()->with('messages', [
-            ['success', __('User editted successfully')],
+            ['success', __('User editted successfully.')],
         ]);
     }
 

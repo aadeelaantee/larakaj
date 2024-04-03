@@ -65,7 +65,7 @@ class StoryController extends Controller
         $obj->save();
 
         return back()->with('messages', [
-            ['success', __('Story added successfully')],
+            ['success', __('Story added successfully.')],
         ]);
     }
 
@@ -89,7 +89,7 @@ class StoryController extends Controller
         $story->save();
 
         return back()->with('messages', [
-            ['success', __('Story editted successfully')],
+            ['success', __('Story editted successfully.')],
         ]);
     }
 

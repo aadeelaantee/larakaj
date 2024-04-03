@@ -38,7 +38,7 @@ class LangCodeController extends Controller
         $obj->save();
 
         return back()->with('messages', [
-            ['success', __('Lang code added successfully')],
+            ['success', __('Lang code added successfully.')],
         ]);
     }
 
@@ -101,7 +101,7 @@ class LangCodeController extends Controller
         $lc->save();
 
         return back()->with('messages', [
-            ['success', __('Lang code editted successfully')],
+            ['success', __('Lang code editted successfully.')],
         ]);
     }
 }

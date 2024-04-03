@@ -59,14 +59,14 @@ class LdManagerController extends Controller
         $obj->save();
 
         return back()->with('messages', [
-            ['success', __('Linkdump category added successfully')],
+            ['success', __('Linkdump category added successfully.')],
         ]);
     }
 
     public function category(Request $request, FormBuilder $formBuilder, LangCode $langCode, LinkdumpCategory $ldCategory)
     {
         $data = [];
-        $data['title'] = _('Links of') . ' ' .  $ldCategory->name;
+        $data['title'] = __('Links of') . ' ' .  $ldCategory->name;
         $data['category'] = $ldCategory;
         $data['rows'] = $ldCategory->links()->orderByDesc('id')->get();
         $data['form'] = $formBuilder->create(LinkForm::class, [
@@ -108,7 +108,7 @@ class LdManagerController extends Controller
         $obj->save();
 
         return back()->with('messages', [
-            ['success', __('Link added successfully')],
+            ['success', __('Link added successfully.')],
         ]);
     }
 
@@ -117,7 +117,7 @@ class LdManagerController extends Controller
         $ldLink->delete();
 
         return back()->with('messages', [
-            ['success', __('Link deleted successfully')],
+            ['success', __('Link deleted successfully.')],
         ]);
     }
 
@@ -167,7 +167,7 @@ class LdManagerController extends Controller
         $ldLink->save();
 
         return back()->with('messages', [
-            ['success', __('Link editted successfully')],
+            ['success', __('Link editted successfully.')],
         ]);
     }
 
@@ -216,7 +216,7 @@ class LdManagerController extends Controller
         $ldCategory->save();
 
         return back()->with('messages', [
-            ['success', __('Linkdump category editted successfully')],
+            ['success', __('Linkdump category editted successfully.')],
         ]);
     }
 
@@ -230,7 +230,7 @@ class LdManagerController extends Controller
         $ldCategory->delete();
 
         return redirect()->route('admin.ldmanager.index')->with('messages', [
-            ['success', __('Linkdump category editted successfully')],
+            ['success', __('Linkdump category editted successfully.')],
         ]);
     }
 }

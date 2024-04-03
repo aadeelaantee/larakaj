@@ -31,11 +31,11 @@ class AuthController extends Controller
             if (Auth::attempt($validator->safe()->only(['email', 'password']), $remember_me)) {
                 $request->session()->regenerate();
                 return redirect()->intended('/')->with('messages', [
-                    ['success', __('Logged in successfully')],
+                    ['success', __('Logged in successfully.')],
                 ]);
             }
             
-            return back()->withErrors(['email' => __('Invalid email or password')]);            
+            return back()->withErrors(['email' => __('Invalid email or password.')]);            
         }
 
         $data = [];
@@ -69,7 +69,7 @@ class AuthController extends Controller
             event(new Registered($user));
 
             return redirect()->route('login')->with('messages', [    
-                ['success', __('User registered successfully')],              
+                ['success', __('User registered successfully.')],              
             ]);
         }
 
@@ -90,7 +90,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return to_route('login')->with('messages', [
-            ['success', __('Logged out successfully')],
+            ['success', __('Logged out successfully.')],
         ]);
     }
 }

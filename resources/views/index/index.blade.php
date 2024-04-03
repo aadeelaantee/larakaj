@@ -45,7 +45,7 @@
                                                   
         </div> 
 @empty
-    <h1> {{ __('No records found') }}
+    <h1> {{ __('No records found.') }}
 @endforelse
 
 @endsection

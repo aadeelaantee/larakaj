@@ -77,7 +77,7 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('messages', [
-            ['success', __('User editted successfully')],
+            ['success', __('User editted successfully.')],
         ]);
     }
 

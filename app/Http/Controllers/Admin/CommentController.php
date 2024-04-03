@@ -37,7 +37,7 @@ class CommentController extends Controller
         $comment->save();
 
         return back()->with('messages', [
-            ['success', __('Comment activated successfully')],
+            ['success', __('Comment activated successfully.')],
         ]);
     }
 
@@ -50,7 +50,7 @@ class CommentController extends Controller
         $comment->save();
 
         return back()->with('messages', [
-            ['success', __('Comment deactivated successfully')],
+            ['success', __('Comment deactivated successfully.')],
         ]);
     }
 
@@ -58,13 +58,13 @@ class CommentController extends Controller
     {
         if ($comment->children()->count())
             return back()->with('messages', [
-            ['danger', __('There is another comment(s) for this comment')],
+            ['danger', __('There is another comment(s) for this comment.')],
         ]);
 
         $comment->delete();
 
         return back()->with('messages', [
-            ['success', __('Comment deleted successfully')],
+            ['success', __('Comment deleted successfully.')],
         ]);
     }
 }

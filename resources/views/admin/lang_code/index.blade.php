@@ -40,7 +40,7 @@
         </table>
     @endif
 @empty
-    <h1> {{__('No records.') }} </h1>
+    <h1> {{__('No records found.') }} </h1>
 @endforelse
 
 @endsection
