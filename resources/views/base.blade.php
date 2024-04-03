@@ -33,7 +33,7 @@
         @show        
     </head>
 
-    <body>
+    <body class="d-flex flex-column min-vh-100">
 
         <nav @class([
             'navbar navbar-expand-lg navbar-light bg-light',
@@ -295,7 +295,7 @@
                     @include('index.linkdumps')
                 </div>
             @endif                           
-            <footer class="mt-5 p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <footer class="mt-5 p-3 mt-auto" style="background-color: rgba(0, 0, 0, 0.2);">
                 {{ __('All right reserved for') }} <a href="{{ route('home') }}">{{ config('app.name') }}</a> &copy;2024</footer>                
         @show  
         
