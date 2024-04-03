@@ -103,7 +103,7 @@ class StoryController extends Controller
 
         $story->delete();
 
-        return back()->with('messages', [
+        return redirect()->route('admin.stories.index')->with('messages', [
             ['success', __('Story deleted successfully.')],
         ]);
     }

@@ -219,4 +219,18 @@ class LdManagerController extends Controller
             ['success', __('Linkdump category editted successfully')],
         ]);
     }
+
+    public function destroyCategory(Request $request, LangCode $langCode, LinkdumpCategory $ldCategory)
+    {
+        /**
+         * this category already has links and we cannot delete it.
+         */
+        abort_if($ldCategory->links()->count(), 404);
+     
+        $ldCategory->delete();
+
+        return redirect()->route('admin.ldmanager.index')->with('messages', [
+            ['success', __('Linkdump category editted successfully')],
+        ]);
+    }
 }

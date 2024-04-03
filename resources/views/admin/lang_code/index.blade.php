@@ -14,7 +14,6 @@
                     <td> # </td>
                     <td> </td>
                     <td> </td>
-                    <td> </td>
                 </tr>
             </thead>
 
@@ -23,8 +22,8 @@
 
     <tr>
         <td> {{ $loop->iteration }} </td>
-        <td> {{ $row->name }} </td>
-        <td> 
+        <td> <a href="{{ route('admin.lang_codes.edit', ['lc' => $row]) }}"> {{ $row->name }} </a> </td>
+        <td class="text-end"> 
             @if ($row->default)
                 <span class="badge bg-primary"> {{ __('default') }} </span>
             @endif
@@ -33,9 +32,6 @@
                 <span class="badge bg-danger">rtl</span>
             @endif
 
-        </td>
-        <td class="text-end"> 
-            <a href="{{ route('admin.lang_codes.edit', ['lc' => $row]) }}">🖉</a>
         </td>
     </tr>
 

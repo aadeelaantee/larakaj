@@ -12,8 +12,7 @@
                     <td> {{ __('Name') }} </td>
                     <td> {{ __('Email') }} </td>
                     <td> {{ __('Status') }} </td>
-                    <td> {{ __('Created at') }}</td>
-                    <td> </td>
+                    <td> {{ __('Created at') }}</td>                
                 </tr>
             </thead>
 
@@ -22,12 +21,11 @@
 
     <tr>
         <td> {{ $loop->iteration }} </td>
-        <td> {{ $row->username }} </td>
+        <td> <a href="{{ route('admin.users.edit', ['user' => $row]) }}">{{ $row->username }}</a> </td>
         <td> {{ $row->name }} </td>
         <td> {{ $row->email }}</td>
         <td> {{ $row->active ? __('Active') : __('Inactive') }} </td>
         <td dir="ltr"> {{ $row->created_at }}</td>
-        <td> <a href="{{ route('admin.users.edit', ['user' => $row]) }}">🖉</a></td>
     </tr>
 
     @if ($loop->last)

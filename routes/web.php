@@ -204,7 +204,10 @@ Route::middleware('before.boot')->group(function () {
                 Route::patch('/ldmanager/{ldLink:id}/update-link', [LdManagerController::class, 'updateLink'])
                     ->name('ldmanager.update_link');
 
-                Route::patch('/ldmanager/update-category/{ldCategory:id}', [LdManagerController::class, 'updateCategory'])
+                Route::delete('/ldmanager/{ldCategory:id}', [LdManagerController::class, 'destroyCategory'])
+                    ->name('ldmanager.destroy_category');
+
+                Route::patch('/ldmanager/{ldCategory:id}/update-category', [LdManagerController::class, 'updateCategory'])
                     ->name('ldmanager.update_category');
 
             	Route::get('/users', [UserController::class, 'index'])

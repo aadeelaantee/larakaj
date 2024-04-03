@@ -34,11 +34,21 @@
     @endif
 
 @empty
-    <h3> {{ __('No records found') }} </h3>
+
 @endforelse
 
 
 
 {!! form($form) !!}
 
+@if (! count($rows))
+    <div class="text-end">
+        <form method="post" action="{{ route('admin.ldmanager.destroy_category', ['ldCategory' => $category]) }}">
+        @method("delete")
+        @csrf
+
+        <input type="submit" class="btn btn-danger" value="{{ __('Delete this category') }}">
+        </form>
+    </div>
+@endif
 @endsection

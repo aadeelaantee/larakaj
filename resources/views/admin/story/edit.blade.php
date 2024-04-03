@@ -14,4 +14,15 @@
     
 @endforelse
 
+
+@if (! $row->posts()->count())
+    <div class="text-end">
+        <form  method="post" action="{{ route('admin.stories.destroy', ['story' => $row]) }}">
+            @csrf
+            @method('delete')
+            <input type="submit" value="{{ __('Delete this story') }}" class="btn btn-danger">
+        </form>
+    </div>
+@endif
+
 @endsection
