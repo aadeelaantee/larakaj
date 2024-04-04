@@ -7,6 +7,8 @@
         @endif
         </title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         @section('styles')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/magula.css">
 
@@ -44,7 +46,7 @@
         <nav @class([
             'navbar navbar-expand-lg navbar-light bg-light',
         ])>
-          <div class="container-fluid">
+            <div class="container-fluid">
             <a href="{{ route('root') }}"><img src="{{ asset('/static/icons/favicon.png') }}" alt="" height="36" class="border-0 me-1"></a>
             <a class="navbar-brand" href="{{ route('root') }}">{{ config('app.name') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +54,7 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 
                 @foreach (\App\Models\LangCode::all() as $langCode_)
                     <li class="nav-item">
@@ -159,20 +161,7 @@
                         ])  href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @endauth
-
-                <!--
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-                -->
-                
-              </ul>
-              <!--
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              -->
+              </ul>            
             </div>
           </div>
         </nav>
@@ -310,16 +299,12 @@
         
 
         @section('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script>
         @show
-
-
-            
-
-
-
-            
+    
         </div>
     </body>
 </html>
