@@ -4,7 +4,7 @@
 
 @forelse ($rows as $row)
     @if ($loop->first)
-        <table class="table text-center">
+        <table class="table text-center table-responsive">
             <thead>
                 <tr>
                     <td> # </td>

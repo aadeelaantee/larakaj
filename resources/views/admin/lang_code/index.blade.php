@@ -8,7 +8,7 @@
 
 @forelse ($rows as $row)
     @if ($loop->first)
-        <table class="table">
+        <table class="table  table-responsive">
             <thead>
                 <tr>
                     <td> # </td>
