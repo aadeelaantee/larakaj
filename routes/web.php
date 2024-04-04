@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\CommentController;
 |
 */
 
-Route::get('/sitemap', [IndexController::class, 'sitemap'])->name('sitemap');
+Route::get('/sitemap.xml', [IndexController::class, 'sitemap'])->name('sitemap');
 
 Route::middleware('before.boot')->group(function () {
 
