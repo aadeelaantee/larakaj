@@ -198,7 +198,7 @@
                     @endsession
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 mb-5">
 
                             @if (Route::is('admin.*'))
                                 <div class="row mb-3">
