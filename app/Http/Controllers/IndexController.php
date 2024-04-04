@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Response;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
@@ -155,5 +157,15 @@ class IndexController extends Controller
             ->get();
 
         return view('index.index', $data);
+    }
+
+    public function sitemap()
+    {
+        $posts = Post::whereActive(true)->get();
+        $content = View::make('index.sitemap')->with('posts', $posts);
+        $response = Response::make($content);
+        $response->header('content-Type', 'application/xml');
+
+        return $response;
     }
 }

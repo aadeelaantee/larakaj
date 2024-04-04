@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\CommentController;
 |
 */
 
+Route::get('/sitemap', [IndexController::class, 'sitemap'])->name('sitemap');
+
 Route::middleware('before.boot')->group(function () {
 
     /*
@@ -37,7 +39,7 @@ Route::middleware('before.boot')->group(function () {
 
     Route::get('/', [IndexController::class, 'index'])->name('root');
     Route::get('/{langCode:name?}', [IndexController::class, 'index'])->name('home');
-
+    
     Route::prefix('/{langCode:name}')->group(function () {
 
         /*
