@@ -229,13 +229,20 @@
                         <div class="card-header">{{ __("Authors") }}</div>
                         <div class="card-body text-center">
                             
-                            @foreach (\App\Models\User::where('active', true)->whereHas('posts')->get() as $author_)
+                            @foreach (\App\Models\User::where('active', true)->whereHas('posts', function ($builder) use ($langCode) {
+                                return $builder->where('lang_code', $langCode->name);
+                            })->get() as $author_)
 
                             <div class="btn-group mb-1 w-100">
                                 <a @class([
                                         'btn btn-outline-primary btn-sm',
                                         'active' => isset($author) && $author_->is($author),
-                                    ]) href="{{ route('author', ['user' => $author_]) }}">{{ $author_->name }} <span class="badge bg-danger">{{ $author_->posts()->count() }}</span></a>                                
+                                    ]) href="{{ route('author', ['user' => $author_]) }}">{{ $author_->name }} 
+                                        <span class="badge bg-danger">
+                                            {{ $author_->posts()->whereLangCode($langCode->name)->count() }}
+                                        </span>
+                                </a>
+                                
                                 <a  @class([
                                         "btn btn-outline-primary btn-sm",
                                         "active" => $routeName == 'profile' && isset($user) && $author_->is($user),
