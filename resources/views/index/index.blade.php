@@ -7,6 +7,11 @@
 @if (isset($tag) || isset($author))
     <div class="alert alert-primary h3" dir=auto>
         @if (isset($tag))
+            @if (auth()->user()?->isAdministrator())
+                <a href="{{ route('admin.tags.change_iwt_status', ['tag' => $tag]) }}" title="{{ $tag->integrated_with_template ? __('Remove tag from template') : __('Add tag to template') }}">
+                    {{ $tag->integrated_with_template ? '+' : '-' }}
+                </a>
+            @endif
             {{ __("Tag") }}: {{ $tag->name }}
         @elseif (isset($author))
             {{ __("Posts of") }} : {{ $author->name }}

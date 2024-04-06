@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LdManagerController;
 use App\Http\Controllers\Admin\LangCodeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,10 @@ Route::middleware('before.boot')->group(function () {
             */
 
             Route::prefix('admin')->name('admin.')->group(function () {
+                
+                Route::get('/tags/{tag:id}/change-iwt-status', [TagController::class, 'changeIwtStatus'])
+                    ->name('tags.change_iwt_status');
+
             	Route::get('/stories', [StoryController::class, 'index'])
                     ->name('stories.index');
 

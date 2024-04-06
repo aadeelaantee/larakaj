@@ -241,7 +241,7 @@
                 <div class="col-lg-3" id="side-bar">
                 
                     <div class="card mb-3">
-                        <div class="card-header">{{ __("Authors") }}</div>
+                        <div class="card-header">{{ __('Authors') }}</div>
                         <div class="card-body text-center">
                             
                             @foreach (\App\Models\User::where('active', true)->whereHas('posts', function ($builder) use ($langCode) {
@@ -268,6 +268,32 @@
                     </div>
                     
                     
+                    @php
+                    $integratedTagsBuilder = $langCode->tags()->where('integrated_with_template', true);
+                    @endphp
+
+                    @if ($integratedTagsBuilder->count())
+                    <div class="card mb-3">
+                        <div class="card-header">{{ __("In site Navigation") }}</div>
+                        <div class="card-body rtl">
+                            @foreach ($integratedTagsBuilder->orderByDesc('id')->get() as $tag_)
+                                @if ($loop->first)
+                                    <div class="w-100 btn-group-vertical">
+                                @endif
+                                <a @class([
+                                        'btn btn-sm btn-outline-primary',
+                                        'active' => isset($tag) && $tag_->is($tag)
+                                    ])  href="{{ route('tag', ['tag' => $tag_]) }}">
+                                        {{ str($tag_->name)->replace('-', ' ') }} </b>
+                                </a>
+                                @if ($loop->last)
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
                     @foreach (\App\Models\LinkdumpCategory::whereIntegratedWithTemplate(true)->whereLangCode($langCode->name)->get() as $category)
                         @if ($category->links()->count())
                             <div class="card mb-3">
