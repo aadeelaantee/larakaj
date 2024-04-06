@@ -106,10 +106,25 @@
                         </li>
                         
                          <li class="nav-item">
-                          <a @class([
+                            <a @class([
                                 "nav-link",
                                 'active fw-bold' => $routeName == 'admin.comments.index',
-                            ]) aria-current="page" href="{{ route('admin.comments.index') }}">{{ __('Comments') }}</a>
+                            ]) aria-current="page" href="{{ route('admin.comments.index') }}">
+
+                            {{ __('Comments') }}
+
+                            @php
+                            $unApprovedComments = \App\Models\Comment::whereActive(false)
+                                ->whereHas('post', function ($builder) use ($langCode) {
+                                    $builder->where('lang_code', $langCode->name);
+                            })->count();
+                            @endphp
+
+                            @if ($unApprovedComments)
+                                <sup class="badge bg-warning"> {{ $unApprovedComments }} </sup>
+                            @endif
+
+                        </a>
                         </li>
                         
                         <li class="nav-item">
