@@ -16,7 +16,7 @@
                         @endif
                         </span>
                         
-                        <a href="#{{ $comment->id }}"><span class="badge bg-secondary" id="{{ $comment->id }}">{{ $comment->date_created }}</span></a>                        
+                        <a href="#{{ $comment->id }}"><span class="badge bg-secondary" dir=ltr id="{{ $comment->id }}">{{ $comment->created_at }}</span></a>                        
                         
                         <p class="mt-2"> {{ $comment->comment }} <a href="#comment_form" onclick="responseTo({{ $comment->id }}, '{{ $comment->comment }}')">{{ __("Response") }}</a> <p>               
                     </div>                
