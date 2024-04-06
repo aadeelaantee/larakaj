@@ -46,7 +46,7 @@
     <div class="row"  id="comments">
         <div class="col-12 text-end mt-5 mb-3">
             <a class="btn btn-outline-primary btn-sm" href="#comments">
-                {{ $row->comments()->where('active', true)->whereNull('parent_id')->count() }} {{ __('Comments') }}
+                {{ $row->comments()->where('active', true)->count() }} {{ __('Comments') }}
             </a>
         </div>    
     </div>   
