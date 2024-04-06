@@ -9,9 +9,7 @@
                 <tr>
                     <td> # </td>
                     <td> {{ __('Title') }} </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>                                   
+                    <td> </td>                                 
                 </tr>
             </thead>
 
@@ -21,26 +19,32 @@
     <tr>
         <td> {{ $loop->iteration }} </td>
         <td> 
-            <a href="{{ route('admin.posts.edit', ['post' => $row]) }}">{{ $row->title }}</a>
+            <a href="{{ route('admin.posts.edit', ['post' => $row]) }}">{{ $row->title }}</a>            
+        </td>
+
+        <td class="text-end">
             @if ($row->locked)
                 <span class="badge bg-warning">{{ __('locked') }}</span>
             @endif
-        </td>
-        <td> {{ $row->active       ? __('Active')  : __('Inactive')    }} </td>
-        <td> {{ $row->show_in_list ? __('In list') : __('Not in list') }}</td>
-        <td> 
+
+            @if (! $row->active)            
+                <span class="badge bg-danger"> {{__('Inactive')    }} </span>
+            @endif
+
+            @if ( !$row->show_in_list)
+                <span class="badge bg-info"> {{  __('Not in list') }} </span>
+            @endif
+
             @php
             $commentCount = $row->comments()->count();
             @endphp
             
             @if ($commentCount)
-                <a href="{{ route('admin.comments.index', ['post' => $row]) }}">
-            @endif
-
-            {{ $row->comments()->count() }} {{ __('Comments') }}
-
-            @if ($commentCount)
-                </a>
+                <span class="badge bg-success">
+                    <a href="{{ route('admin.comments.index', ['post' => $row]) }}">            
+                        {{ $row->comments()->count() }} {{ __('Comments') }}
+                    </a>
+                </span>
             @endif
         </td>
     </tr>
