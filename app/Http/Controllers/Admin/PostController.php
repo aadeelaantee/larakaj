@@ -74,7 +74,7 @@ class PostController extends Controller
 
         $this->setTags($request->tags, $langCode, $post);
 
-        return back()->with('messages', [
+        return to_route('admin.posts.edit', ['post' => $post])->with('messages', [
             ['success',  __('Post added successfully.')],
         ]);
     }
