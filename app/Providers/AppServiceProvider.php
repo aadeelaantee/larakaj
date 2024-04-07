@@ -58,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
             'heading_permalink' => [
                 'html_class' => 'headerlink',
                 'id_prefix' => 'content',
-                'apply_id_to_heading' => false,
+                'apply_id_to_heading' => true,
                 'heading_class' => '',
                 'fragment_prefix' => 'content',
                 'insert' => 'after',
