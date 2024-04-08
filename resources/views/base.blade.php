@@ -10,8 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         @section('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/panda-syntax-light.css">
-
+        
         @if ($langCode->rtl)
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
             <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
@@ -27,6 +26,9 @@
         <link href="{{ asset('static/css/github-markdown-light.css') }}" type="text/css" rel="stylesheet" >
         <link href="{{ asset('static/css/codehilite.css') }}" type="text/css" rel="stylesheet" >
         <link href="{{ asset('static/css/keys.css') }}" type="text/css" rel="stylesheet">
+
+        <link href="{{ asset('static/css/torch.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('static/css/tailwind.css') }}" type="text/css" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('static/icons/favicon.png') }}">
         @show
@@ -349,8 +351,7 @@
         @section('scripts')
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script>
+        
         @show
     
         </div>

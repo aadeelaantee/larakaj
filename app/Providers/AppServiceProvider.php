@@ -15,6 +15,7 @@ use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use ElGigi\CommonMarkEmoji\EmojiExtension;
 use League\CommonMark\MarkdownConverter;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -79,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             $environment->addExtension(new GithubFlavoredMarkdownExtension());
             $environment->addExtension(new TableExtension());
             $environment->addExtension(new EmojiExtension());
+            $environment->addExtension(new TorchlightExtension());
 
             // Instantiate the converter engine and start converting some Markdown!
             return new MarkdownConverter($environment);
