@@ -12,10 +12,7 @@
         @section('styles')
         
         @if ($langCode->rtl)
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-            <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('static/css/fa.css') }}" type="text/css" rel="stylesheet" >
-            <link href="{{ asset('static/css/admonition_fa.css') }}" type="text/css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">            
         @else
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -29,6 +26,12 @@
 
         <link href="{{ asset('static/css/torch.css') }}" type="text/css" rel="stylesheet">
         <link href="{{ asset('static/css/tailwind.css') }}" type="text/css" rel="stylesheet">
+
+        @if ($langCode->name == "fa")
+            <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('static/css/fa.css') }}" type="text/css" rel="stylesheet" >
+            <link href="{{ asset('static/css/admonition_fa.css') }}" type="text/css" rel="stylesheet">
+        @endif
 
         <link rel="icon" type="image/x-icon" href="{{ asset('static/icons/favicon.png') }}">
         @show
