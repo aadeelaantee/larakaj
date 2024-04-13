@@ -71,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
             ],
         ];
 
-        $this->app->bind('commonMark', function () use ($config) {
+        $this->app->singleton('commonMark', function () use ($config) {
             $environment = new Environment($config);
             $environment->addExtension(new CommonMarkCoreExtension());
             $environment->addExtension(new FootnoteExtension());

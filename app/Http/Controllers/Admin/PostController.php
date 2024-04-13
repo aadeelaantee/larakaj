@@ -142,7 +142,7 @@ class PostController extends Controller
         $post->story_id         = $request->story_id;
         $post->author_note      = $request->author_note;
         
-        $post->resume_html      = app('commonMark')->convertToHtml($post->resume);
+        $post->resume_html      = app('commonMark')->convert($post->resume);
         $post->body_html        = app('commonMark')->convertToHtml($post->body);
 
         $post->save();
