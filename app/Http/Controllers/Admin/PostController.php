@@ -63,8 +63,17 @@ class PostController extends Controller
 
         $post->title            = $request->title;
         $post->slug             = $request->slug;
+
         $post->resume           = $request->resume;
         $post->body             = $request->body;
+
+        try {
+            $post->resume_html  = app('commonMark')->convertToHtml($post->resume);
+            $post->body_html    = app('commonMark')->convertToHtml($post->body);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
         $post->meta_keywords    = $request->meta_keywords;
         $post->meta_description = $request->meta_description;
         $post->story_id         = $request->story_id;
@@ -135,15 +144,21 @@ class PostController extends Controller
 
         $post->title            = $request->title;
         $post->slug             = $request->slug;
+
         $post->resume           = $request->resume;
         $post->body             = $request->body;
+
         $post->meta_keywords    = $request->meta_keywords;
         $post->meta_description = $request->meta_description;
         $post->story_id         = $request->story_id;
         $post->author_note      = $request->author_note;
         
-        $post->resume_html      = app('commonMark')->convert($post->resume);
-        $post->body_html        = app('commonMark')->convertToHtml($post->body);
+        try {
+            $post->resume_html  = app('commonMark')->convertToHtml($post->resume);
+            $post->body_html    = app('commonMark')->convertToHtml($post->body);          
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
 
         $post->save();
 
