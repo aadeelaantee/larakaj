@@ -27,6 +27,11 @@
             {{ __("Posts of") }} : {{ $author->name }}
         @endif
     </div>
+@else
+    {{-- home page --}}
+    @section('canonical_tag')
+        <link rel="canonical" href="{{ config('app.url') }}" />
+    @endsection
 @endif
 
 @forelse ($rows as $row)
