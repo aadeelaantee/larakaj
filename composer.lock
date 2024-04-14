@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bed07084aca5a6e81165a97b008b42f1",
+    "content-hash": "02fbe3d947a56e80e4296fa0760f2256",
     "packages": [
         {
             "name": "brick/math",
@@ -6379,6 +6379,67 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wnx/commonmark-mark-extension",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stefanzweifel/commonmark-mark-extension.git",
+                "reference": "85c331bc202f90249655e3fa238a069833d897bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stefanzweifel/commonmark-mark-extension/zipball/85c331bc202f90249655e3fa238a069833d897bc",
+                "reference": "85c331bc202f90249655e3fa238a069833d897bc",
+                "shasum": ""
+            },
+            "require": {
+                "league/commonmark": "^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpunit/phpunit": "^9.5 | ^10",
+                "vimeo/psalm": "^5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wnx\\CommonmarkMarkExtension\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Zweifel",
+                    "email": "stefan@stefanzweifel.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Render ==highlighted== texts as <mark> elements in league/commonmark",
+            "homepage": "https://github.com/wnx/commonmark-mark-extension",
+            "keywords": [
+                "commonmark-mark-extension",
+                "wnx"
+            ],
+            "support": {
+                "source": "https://github.com/stefanzweifel/commonmark-mark-extension/tree/v1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://buymeacoff.ee/3oQ64YW",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/stefanzweifel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-10-16T12:17:03+00:00"
         },
         {
             "name": "ycs77/laravel-form-builder-bs4",

@@ -13,8 +13,9 @@ use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkRenderer;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
-use ElGigi\CommonMarkEmoji\EmojiExtension;
 use League\CommonMark\MarkdownConverter;
+use ElGigi\CommonMarkEmoji\EmojiExtension;
+use Wnx\CommonmarkMarkExtension\MarkExtension;
 use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class AppServiceProvider extends ServiceProvider
@@ -79,8 +80,9 @@ class AppServiceProvider extends ServiceProvider
             $environment->addExtension(new TableOfContentsExtension());
             $environment->addExtension(new GithubFlavoredMarkdownExtension());
             $environment->addExtension(new TableExtension());
-            $environment->addExtension(new EmojiExtension());
+            $environment->addExtension(new EmojiExtension()); // :warning: and many more
             $environment->addExtension(new TorchlightExtension());
+            $environment->addExtension(new MarkExtension()); // ==mark==
 
             // Instantiate the converter engine and start converting some Markdown!
             return new MarkdownConverter($environment);
