@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('canonical_tag')
+    <link rel="canonical" href="{{ config('app.url') . '/' . $row->lang_code .'/post/' . $row->slug }}" />
+@endsection
+
 @section('title', $title)
 
 @section('meta_keywords', str_replace('+', ',', $row->meta_keywords))

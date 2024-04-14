@@ -2,6 +2,10 @@
 
 @section('title', $title)
 
+@section('canonical_tag')
+    <link rel="canonical" href="{{ config('app.url') . '/' . $langCode->name .'/register' }}" />
+@endsection
+
 @section('content')
 
 {!! form($form) !!}

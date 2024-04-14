@@ -5,7 +5,7 @@
 
 
 @section('canonical_tag')
-<link rel="canonical" href="{{ config('app.url') }}/fa/profile/{{ $user->username }}" />
+<link rel="canonical" href="{{ config('app.url') }}/{{ $langCode->name }}/profile/{{ $user->username }}" />
 @endsection
 
 

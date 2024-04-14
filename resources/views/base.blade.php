@@ -7,6 +7,12 @@
         @endif
         </title>
 
+        @hasSection('canonical_tag')
+            @yield('canonical_tag')
+        @else
+            <link rel="canonical" href="{{ url()->current() }}" />
+        @endif
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         @section('styles')
