@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PerRequest
+class AppPerRequest
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,17 @@ class PerRequest
      */
     public function handle(Request $request, Closure $next): Response
     {
+        /*
+         |----------------------------------------------------------------------
+         | Force application to work in same domain of 
+         | APP_URL environment variable.
+         |----------------------------------------------------------------------
+        */
+
+        url()->formatHostUsing(function() {
+            return config('app.url');
+        });
+
         return $next($request);
     }
 }
