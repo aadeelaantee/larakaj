@@ -1,5 +1,9 @@
 <html lang="{{ $langCode->name }}" @if ($langCode->rtl) dir="rtl" @endif>
     <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Language" content="{{ $langCode->name }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>
         {{ config('app.name') }}
         @hasSection('title')
@@ -13,8 +17,7 @@
             <link rel="canonical" href="{{ url()->current() }}" />
         @endif
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
         @section('styles')
         
         @if ($langCode->rtl)
@@ -49,7 +52,6 @@
         @hasSection('meta_description')
             <meta name="description" content="@yield('meta_description')">
         @endif
-
     </head>
 
     <body class="d-flex flex-column min-vh-100">
