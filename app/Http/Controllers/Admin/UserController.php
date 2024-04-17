@@ -42,7 +42,11 @@ class UserController extends Controller
             [
                 __('Change user password') . ' ' . $user->username,
                 route('admin.users.password', ['user' => $user]),
-            ]
+            ],
+            [
+                __('Profile') . ' ' . $user->username,
+                route('profile', ['user' => $user]),
+            ],
         ];
 
         return view('admin.user.edit', $data);
