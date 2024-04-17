@@ -53,7 +53,7 @@
         </div>
 
         <div class="col-9 ps-3">
-            <p class="h4"> {{ $row->author->name }} </p>
+            <p class="h4 mb-3"> {{ $row->author->name }} </p>
 
             {!! $row->author->about_html ?? "" !!}
         </div>
