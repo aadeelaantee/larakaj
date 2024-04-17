@@ -47,16 +47,15 @@
         </div>
     </div>
     
-    <div class="row mt-5">
+    <div class="row g-0 mt-5 p-3 border rounded">
         <div class="col-3">
-            <img src="{{ $row->author->avatar() }}" class="img-thumbnail">
+            <img src="{{ $row->author->avatar() }}" class="rounded-circle img-fluid">
         </div>
 
-        <div class="col-9 p-3 border rounded">
+        <div class="col-9 ps-3">
             <p class="h4"> {{ $row->author->name }} </p>
 
             {!! $row->author->about_html ?? "" !!}
-            
         </div>
     </div>
 
