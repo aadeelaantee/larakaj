@@ -12,14 +12,14 @@
 @section('content')
     <div class="row profile">
         <div class="col-md-2 mb-3"><img src="{{ $user->avatar(128) }}" class="img-fluid"></div>
-        <div class="col-md-10"> 
+        <div class="col-md-10">
             <div class="row">
-                <div class="col-md-3  align-self-end"> <h3> {{ $user->name }} </h3> </div>                
+                <div class="col-md-3  align-self-end"> <h3> {{ $user->name }} </h3> </div>
                 <div class="col-md-9  align-self-center ">
                     @if ($user->is(auth()->user()))
                         <a 
                             class="btn btn-outline-primary btn-sm"
-                            href="{{ route('edit_profile', ['user' => $user]) }}">{{ __('Edit profile') }}</a> 
+                            href="{{ route('edit_profile', ['user' => $user]) }}">{{ __('Edit profile') }}</a>
                     @endif
                     
                     @auth

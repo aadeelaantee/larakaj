@@ -62,8 +62,9 @@ class User extends Authenticatable
 
     public function avatar($size = 128): string
     {
-        if ($this->image)
-            return $this->image;
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
             
         $digest = md5(strtolower($this->email));
         return "https://www.gravatar.com/avatar/{$digest}?d=identicon&s={$size}";

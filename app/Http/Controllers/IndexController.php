@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
@@ -111,6 +112,7 @@ class IndexController extends Controller
             'github'      => 'nullable|min:5',
             'youtube'     => 'nullable|min:5',
             'about'       => 'nullable|min:2',
+            'image'       => 'nullable|image',
         ]);
 
         $user->name       = $validated['name'];
@@ -124,10 +126,38 @@ class IndexController extends Controller
         $user->about      = $validated['about'];
         $user->about_html = app('commonMark')->convert($user->about);
 
+        //dd($validated);
+
+        if (isset($validated['image'])) {            
+            $image = $validated['image']->store('images/profile', 'public');
+
+            /**
+             * Delete Old image from disk.
+             */
+            if ($user->image)
+                Storage::disk('public')->delete($user->image);
+
+            $user->image = $image;
+        }
+
         $user->save();
 
         return back()->with('messages', [
             ['success', __('User editted successfully.')],
+        ]);
+    }
+
+    public function deleteProfileImage(Request $request, LangCode $langCode, User $user)
+    {
+        abort_if(! $user->image, 404);
+
+        Storage::disk('public')->delete($user->image);
+
+        $user->image = null;
+        $user->save();
+
+        return back()->with('messages', [
+            ['success', __('Profile image deleted successfully.')],
         ]);
     }
 

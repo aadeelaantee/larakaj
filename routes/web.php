@@ -115,6 +115,10 @@ Route::middleware('before.boot')->group(function () {
             Route::patch('/update-profile/{user:username}', [IndexController::class, 'updateProfile'])
                 ->name('update_profile')
                 ->withoutScopedBindings();
+            
+            Route::get('/delete-profile-image/{user:username}', [IndexController::class, 'deleteProfileImage'])
+                ->name('delete_profile_image')
+                ->withoutScopedBindings();
 
             Route::get('/verification/notice', [VerificationController::class, 'notice'])
                 ->name('verification.notice');
