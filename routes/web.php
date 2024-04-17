@@ -108,15 +108,15 @@ Route::middleware('before.boot')->group(function () {
 
         Route::middleware(['auth'])->group(function () {
             
-            Route::get('/edit-profile/{user:username}', [IndexController::class, 'editProfile'])
+            Route::get('/profile/{user:username}/edit', [IndexController::class, 'editProfile'])
                 ->name('edit_profile')
                 ->withoutScopedBindings();
 
-            Route::patch('/update-profile/{user:username}', [IndexController::class, 'updateProfile'])
+            Route::patch('/profile/{user:username}/update', [IndexController::class, 'updateProfile'])
                 ->name('update_profile')
                 ->withoutScopedBindings();
             
-            Route::get('/delete-profile-image/{user:username}', [IndexController::class, 'deleteProfileImage'])
+            Route::get('/profile/{user:username}/delete-image', [IndexController::class, 'deleteProfileImage'])
                 ->name('delete_profile_image')
                 ->withoutScopedBindings();
 
