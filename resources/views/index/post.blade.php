@@ -47,6 +47,19 @@
         </div>
     </div>
     
+    <div class="row mt-5">
+        <div class="col-3">
+            <img src="{{ $row->author->avatar() }}" class="img-thumbnail">
+        </div>
+
+        <div class="col-9 p-3 border rounded">
+            <p class="h4"> {{ $row->author->name }} </p>
+
+            {!! $row->author->about_html ?? "" !!}
+            
+        </div>
+    </div>
+
     <div class="row"  id="comments">
         <div class="col-12 text-end mt-5 mb-3">
             <a class="btn btn-outline-primary btn-sm" href="#comments">
