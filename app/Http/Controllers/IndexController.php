@@ -36,7 +36,23 @@ class IndexController extends Controller
     {
         $data = [];
         $data['title'] = $post->title;
+
+        $data['next'] = Post::query()
+            ->where('id', '>', $post->id)
+            ->where('active', true)
+            ->where('lang_code', $langCode->name)
+            ->orderBy('id')
+            ->first();
+
+        $data['prev'] = Post::query()
+            ->where('id', '<', $post->id)
+            ->where('lang_code', $langCode->name)
+            ->where('active', true)
+            ->orderByDesc('id')
+            ->first();
+
         $data['row'] = $post;
+
         $data['commentForm'] = $formBuilder->create(CommentForm::class);
 
         return view('index.post', $data);

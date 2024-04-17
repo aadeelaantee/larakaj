@@ -47,7 +47,26 @@
         </div>
     </div>
     
-    <div class="row g-0 mt-5 p-3 border rounded">
+
+    @if ($prev || $next)
+        <div class="row g-0 mt-5 p-3 border rounded">
+            <div class="col-6 text-start">
+                @if ($prev)
+                    {{ __('Previous post') }}: 
+                    <a href="{{ route('post', ['post' => $prev]) }}">{{ $prev->title }}</a>
+                @endif
+            </div>
+
+            <div class="col-6 text-end">
+                @if ($next)
+                    {{ __('Next post') }}: 
+                    <a href="{{ route('post', ['post' => $next]) }}">{{ $next->title }}</a>
+                @endif
+            </div>
+        </div>
+    @endif
+
+    <div class="row g-0 mt-4 p-3 border rounded">
         <div class="col-3">
             <img src="{{ $row->author->avatar() }}" class="rounded-circle img-fluid">
         </div>
