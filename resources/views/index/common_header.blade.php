@@ -18,7 +18,7 @@
                                 {{ $row->author->name }}
                                 </a>     
                             </span>
-                         {{ __('on') }} <span class="badge bg-danger">{{ $row->created_at }}</span>
+                         {{ __('on') }} <span class="badge bg-danger">{{ $row->created_at->diffForHumans() }}</span>
                         
                         @foreach ($row->tags as $tag)
                             @if ($loop->first)
