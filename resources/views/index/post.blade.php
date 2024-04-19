@@ -46,10 +46,20 @@
             @endif
         </div>
     </div>
-    
+
+    <div class="row g-0 mt-4">
+        <div class="col-3 p-3">
+            <img src="{{ $row->author->avatar() }}" class="rounded-circle img-fluid">
+        </div>
+
+        <div class="col-9 p-3 border">
+            {!! $row->author->about_html ?? "" !!}
+        </div>
+    </div>
+
 
     @if ($prev || $next)
-        <div class="row g-0 mt-5 p-3 border rounded">
+        <div class="row g-0 mt-5  border-0 rounded">
             <div class="col-6 text-start">
                 @if ($prev)
                     {{ __('Previous post') }}: 
@@ -65,18 +75,6 @@
             </div>
         </div>
     @endif
-
-    <div class="row g-0 mt-4 p-3 border rounded">
-        <div class="col-3">
-            <img src="{{ $row->author->avatar() }}" class="rounded-circle img-fluid">
-        </div>
-
-        <div class="col-9 ps-3">
-            <p class="h4 mb-3"> {{ $row->author->name }} </p>
-
-            {!! $row->author->about_html ?? "" !!}
-        </div>
-    </div>
 
     <div class="row"  id="comments">
         <div class="col-12 text-end mt-5 mb-3">
