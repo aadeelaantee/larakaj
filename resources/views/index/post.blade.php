@@ -81,7 +81,10 @@
     <div class="row"  id="comments">
         <div class="col-12 text-end mt-5 mb-3">
             <a class="btn btn-outline-primary btn-sm" href="#comments">
-                {{ $row->comments()->where('active', true)->count() }} {{ __('Comments') }}
+                @php
+                $commentCount = $row->comments()->where('active', true)->count();
+                @endphp
+                 {{ trans_choice('Comment|Comments', $commentCount) }} {{ $commentCount }}
             </a>
         </div>    
     </div>   

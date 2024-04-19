@@ -56,7 +56,11 @@
                         <a href="{{ route('post', ['langCode' => $row->lang_code, 'post' => $row->slug]) }}" class="btn btn-outline-danger btn-sm">{{ __('Continue reading this post') }}</a>
                         <a href="{{ route('post', ['langCode' => $row->lang_code, 'post' => $row->slug]) }}#comments" 
                             class="btn btn-sm btn-outline-primary">
-                                {{ $row->comments()->where('active', true)->count() }} {{ __('comments') }}
+                                @php
+                                $commentCount = $row->comments()->where('active', true)->count();
+                                @endphp
+
+                                {{ trans_choice('Comment|Comments', $commentCount) }} {{ $commentCount }}
                         </a>                
                     </div>                        
                 </div>                           

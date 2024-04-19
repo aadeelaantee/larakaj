@@ -41,8 +41,11 @@
             
             @if ($commentCount)
                 <span class="badge bg-success">
-                    <a href="{{ route('admin.comments.index', ['post' => $row]) }}">            
-                        {{ $row->comments()->count() }} {{ __('Comments') }}
+                    <a href="{{ route('admin.comments.index', ['post' => $row]) }}">
+                        @php
+                        $commentCount = $row->comments()->count();
+                        @endphp
+                        {{ trans_choice('Comment|Comments', $commentCount) }} {{ $commentCount }} 
                     </a>
                 </span>
             @endif
