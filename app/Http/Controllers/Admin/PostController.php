@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Kris\LaravelFormBuilder\FormBuilder;
 use App\Forms\Admin\Posts\PostForm;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\LangCode;
+use App\Models\File as MyFile;
 
 class PostController extends Controller
 {
@@ -212,5 +214,26 @@ class PostController extends Controller
                     $t->delete();
             }
         }
+    }
+
+
+    public function uploadFiles(Request $request, LangCode $langCode, Post $post)
+    {
+        $validator = Validator::make($request->only(['file']), [
+            'file' => 'required|image',
+        ]);
+
+        if ($validator->fails()) {
+            return response("File validation error", 403);
+        }
+    
+        $filePath = $validator->safe()->file->store("posts/{$post->id}", 'public');
+
+        $f = new MyFile();
+        $f->path = $filePath;
+        $f->post_id = $post->id;
+        $f->save();
+
+        return response($post->id, 200);
     }
 }

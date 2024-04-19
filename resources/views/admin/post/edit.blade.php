@@ -31,4 +31,14 @@
     </ul>
 @endif
 
+
+<div class="mt-5">
+    <p class="mb-3"> {{ __('Drop files here for upload.') }} </p>
+    <form action="{{ route('admin.posts.upload_files', ['post' =>$row]) }}" class="dropzone">@csrf</form>
+</div>
+
+
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
 @endsection

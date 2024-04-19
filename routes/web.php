@@ -179,6 +179,9 @@ Route::middleware('before.boot')->group(function () {
                 Route::get('/posts/{post:id}/change-lock', [PostController::class, 'changeLock'])
                     ->name('posts.change_lock');
 
+                Route::post('/posts/{post:id}/upload_files', [PostController::class, 'uploadFiles'])
+                    ->name('posts.upload_files');
+                    
                 Route::get('/comments/{post:id?}', [CommentController::class, 'index'])
                     ->name('comments.index');
 

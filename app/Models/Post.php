@@ -36,4 +36,9 @@ class Post extends Model
     {
         return $this->belongsTo(LangCode::class, 'lang_code', 'name');
     }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(\App\Models\File::class);
+    }
 }
