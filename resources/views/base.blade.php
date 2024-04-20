@@ -208,6 +208,17 @@
                     ])
                     
              id="main-content">
+
+                    {{-- $errors--}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger"> 
+                        @foreach ($errors->all() as $error)
+                            {{ $error }} <br>
+                        @endforeach
+                        </div>
+                    @endif
+
+
                     {{-- user defined flashed messages --}}
                     @session('messages')                
                         @foreach($value as $message)
