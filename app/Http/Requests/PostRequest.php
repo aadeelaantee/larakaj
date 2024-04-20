@@ -38,7 +38,7 @@ class PostRequest extends FormRequest
                 })->ignore($postId),
             ],
             'resume'            => 'required|min:2',
-            'body'              => 'required|min:2',
+            'body'              => 'nullable|min:2',
             'meta_keywords'     => 'nullable',
             'meta_description'  => 'nullable',
             'tags' => 'nullable',

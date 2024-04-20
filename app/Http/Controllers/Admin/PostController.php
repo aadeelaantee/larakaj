@@ -71,7 +71,10 @@ class PostController extends Controller
 
         try {
             $post->resume_html  = app('commonMark')->convertToHtml($post->resume);
-            $post->body_html    = app('commonMark')->convertToHtml($post->body);
+            $post->body_html    = $post->body
+                ? app('commonMark')->convertToHtml($post->body)
+                : null;
+
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -157,7 +160,10 @@ class PostController extends Controller
         
         try {
             $post->resume_html  = app('commonMark')->convertToHtml($post->resume);
-            $post->body_html    = app('commonMark')->convertToHtml($post->body);          
+            $post->body_html    = $post->body
+                ? app('commonMark')->convertToHtml($post->body)
+                : null;
+                
         } catch (\Exception $e) {
             return $e->getMessage();
         }

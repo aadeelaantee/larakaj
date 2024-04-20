@@ -52,8 +52,11 @@
           
             <div class="row mt-4 mb-3"> 
                 <div class="col text-end">
-                    <div class="btn-group">                    
-                        <a href="{{ route('post', ['langCode' => $row->lang_code, 'post' => $row->slug]) }}" class="btn btn-outline-danger btn-sm">{{ __('Continue reading this post') }}</a>
+                    <div class="btn-group">
+                        @if (filled($row->body))                    
+                            <a href="{{ route('post', ['langCode' => $row->lang_code, 'post' => $row->slug]) }}" class="btn btn-outline-danger btn-sm">{{ __('Continue reading this post') }}</a>
+                        @endif
+
                         <a href="{{ route('post', ['langCode' => $row->lang_code, 'post' => $row->slug]) }}#comments" 
                             class="btn btn-sm btn-outline-primary">
                                 @php

@@ -42,7 +42,7 @@
             @if ($row->body_html)
                 {!! $row->body_html !!}
             @else
-                {{ $row->body }}
+                {!! $row->resume_html !!}
             @endif
         </div>
     </div>
