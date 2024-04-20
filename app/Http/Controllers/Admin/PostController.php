@@ -116,6 +116,13 @@ class PostController extends Controller
             [__('View post'), route('post', ['post' => $post])],
         ];
 
+        $commentCount = $post->comments()->count();
+        if ($commentCount)
+            $data['navigation'][] = [
+                trans_choice('Comment|Comments', $commentCount) . ' ' . $commentCount,
+                route('admin.comments.index', ['post' => $post, 'lang_code' => $post->lang_code]),
+            ];
+
         return view('admin.post.edit', $data);
     }
 
@@ -163,7 +170,7 @@ class PostController extends Controller
             $post->body_html    = $post->body
                 ? app('commonMark')->convertToHtml($post->body)
                 : null;
-                
+
         } catch (\Exception $e) {
             return $e->getMessage();
         }
