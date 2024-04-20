@@ -37,17 +37,29 @@
     <form action="{{ route('admin.posts.upload_files', ['post' =>$row]) }}" class="dropzone" id="dropzone">@csrf</form>
 </div>
 
+@endsection
 
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 
+{{-- section style --}}
+@section('styles')
+@parent
 <style>
 .dropzone .dz-image img {
     width: 120px;
     height: 120px;
 }
 </style>
+@endsection
+{{-- end section style --}}
+
+
+
+{{-- section scripts --}}
+@section("scripts")
+@parent
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 
 <script>
 Dropzone.options.dropzone = {  
@@ -56,12 +68,12 @@ Dropzone.options.dropzone = {
         
         @foreach ($row->files as $file)
             mockFile = { 
-                name: '{{ asset($file->path) }}',
-                type: 'image/jpeg',
-                url: '{{ asset('/storage/' . $file->path) }}',
+                name: '{{ '/storage/' . $file->path }}',
+                type: '{{ \Illuminate\Support\Facades\File::mimeType(storage_path('app/public/'. $file->path)) }}',
+                url: '{{ '/storage/' . $file->path }}',
                 status: this.ADDED,
                 accepted: true,
-                //size: 100000
+                size: {{ \Illuminate\Support\Facades\Storage::size('public/'. $file->path) }}
             };
                 
             this.emit("addedfile", mockFile);
@@ -73,3 +85,4 @@ Dropzone.options.dropzone = {
 };
 </script>
 @endsection
+{{-- end section scripts --}}
