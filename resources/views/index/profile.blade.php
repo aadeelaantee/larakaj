@@ -14,8 +14,8 @@
         <div class="col-md-2 mb-3"><img src="{{ $user->avatar(128) }}" class="img-thumbnail"></div>
         <div class="col-md-10">
             <div class="row">
-                <div class="col-md-3  align-self-end"> <h3> {{ $user->name }} </h3> </div>
-                <div class="col-md-9  align-self-center ">
+                <div class="col-md-3  text-start"> <h3> {{ $user->name }} </h3> </div>
+                <div class="col-md-9  text-end ">
                     @if ($user->is(auth()->user()))
                         <a 
                             class="btn btn-outline-primary btn-sm"
@@ -63,7 +63,7 @@
                     <h5 class="border-bottom pb-2"> {{ __("Latest posts") }}</h5>
                     
                     @php
-                    $posts = $user->posts()->whereActive(true)->orderByDesc('id')->take(10)->get();
+                    $posts = $user->posts()->whereLangCode($langCode->name)->whereActive(true)->orderByDesc('id')->take(10)->get();
                     @endphp
 
                     @if ($posts)
@@ -77,7 +77,9 @@
                     <h5 class="border-bottom pb-2"> {{ __("Latest comments") }}</h5>
                     
                     @php
-                    $comments = $user->comments()->whereActive(true)->orderByDesc('id')->take(10)->get();
+                    $comments = $user->comments()->whereHas('post', function ($builder) use ($langCode) {
+                        return $builder->where('lang_code', $langCode->name);
+                    })->whereActive(true)->orderByDesc('id')->take(10)->get();
                     @endphp
 
                     @if ($comments)
