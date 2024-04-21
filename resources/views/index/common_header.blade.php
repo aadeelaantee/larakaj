@@ -10,26 +10,26 @@
             
             
             <div class="row">    
-                <div class="col-12 text-secondary post-info-line">
+                <div class="col-12 text-muted post-info-line">
                     <p dir="auto">
                         {{ __('Posted by') }}:
-                            <span class="badge bg-warning">
+                            <span class="badge bg-warning rounded-pill">
                                 <a href="{{ route('profile', ['langCode' => $row->lang_code, 'user' => $row->author->username]) }}">                                
                                 {{ $row->author->name }}
                                 </a>     
                             </span>
-                         {{ __('on') }} <span class="badge bg-danger">{{ $row->created_at->diffForHumans() }}</span>
+                         {{ __('on') }} <span class="badge bg-danger rounded-pill">{{ $row->created_at->diffForHumans() }}</span>
                         
                         @foreach ($row->tags as $tag)
                             @if ($loop->first)
                                 {{ __('under') }}
                             @endif
                             
-                            <a href="{{ route('tag', ['langCode' => $row->lang_code, 'tag' => $tag->name]) }}"><span class="badge bg-primary">{{ $tag->name }}</span></a>
+                            <a href="{{ route('tag', ['langCode' => $row->lang_code, 'tag' => $tag->name]) }}"><span class="badge rounded-pill bg-primary">{{ $tag->name }}</span></a>
                         @endforeach 
                         
                         @auth
-                            <a href="{{ route('admin.posts.edit', ['post' => $row]) }}"><span class="badge bg-primary">{{ __('Edit') }}</span></a>
+                            <a href="{{ route('admin.posts.edit', ['post' => $row]) }}"><span class="badge rounded-pill bg-primary">{{ __('Edit') }}</span></a>
                         @endauth
                     </p>
                 </div>
