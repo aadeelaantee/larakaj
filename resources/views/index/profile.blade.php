@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="row profile">
-        <div class="col-md-2 mb-3"><img src="{{ $user->avatar(128) }}" class="img-thumbnail"></div>
+        <div class="col-md-2 mb-3"><img src="{{ $user->avatar(128) }}" class="img-thumbnail rounded-circle"></div>
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-3  text-start"> <h3> {{ $user->name }} </h3> </div>
