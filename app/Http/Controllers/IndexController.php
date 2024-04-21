@@ -26,7 +26,7 @@ class IndexController extends Controller
         $data['rows'] = Post::whereShowInList(true)
             ->whereActive(true)
             ->whereLangCode($langCode->name)
-            ->orderByDesc('id')
+            ->orderByDesc('created_at')
             ->get();
 
         return view('index.index', $data);
@@ -41,14 +41,14 @@ class IndexController extends Controller
             ->where('id', '>', $post->id)
             ->where('active', true)
             ->where('lang_code', $langCode->name)
-            ->orderBy('id')
+            ->orderBy('created_at')
             ->first();
 
         $data['prev'] = Post::query()
             ->where('id', '<', $post->id)
             ->where('lang_code', $langCode->name)
             ->where('active', true)
-            ->orderByDesc('id')
+            ->orderByDesc('created_at')
             ->first();
 
         $data['row'] = $post;
@@ -185,7 +185,7 @@ class IndexController extends Controller
         $data['rows'] = $tag->posts()
             ->whereActive(true)
             ->whereLangCode($langCode->name)
-            ->orderByDesc('id')
+            ->orderByDesc('created_at')
             ->get();
 
         return view('index.index', $data);
@@ -199,7 +199,7 @@ class IndexController extends Controller
         $data['rows'] = $user->posts()
             ->whereActive(true)
             ->whereLangCode($langCode->name)
-            ->orderByDesc('id')
+            ->orderByDesc('created_at')
             ->get();
 
         return view('index.index', $data);

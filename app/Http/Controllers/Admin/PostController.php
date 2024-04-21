@@ -21,7 +21,7 @@ class PostController extends Controller
         $data = [];
         $data['title'] = __('Posts');
 
-        $data['rows'] = Post::orderBy('id', 'desc')
+        $data['rows'] = Post::orderBy('created_at', 'desc')
             ->whereLangCode($langCode->name)
             ->get();
 

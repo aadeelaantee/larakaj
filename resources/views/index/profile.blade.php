@@ -63,7 +63,7 @@
                     <h5 class="border-bottom pb-2"> {{ __("Latest posts") }}</h5>
                     
                     @php
-                    $posts = $user->posts()->whereLangCode($langCode->name)->whereActive(true)->orderByDesc('id')->take(10)->get();
+                    $posts = $user->posts()->whereLangCode($langCode->name)->whereActive(true)->orderByDesc('created_at')->take(10)->get();
                     @endphp
 
                     @if ($posts)
@@ -79,7 +79,7 @@
                     @php
                     $comments = $user->comments()->whereHas('post', function ($builder) use ($langCode) {
                         return $builder->where('lang_code', $langCode->name);
-                    })->whereActive(true)->orderByDesc('id')->take(10)->get();
+                    })->whereActive(true)->orderByDesc('created_at')->take(10)->get();
                     @endphp
 
                     @if ($comments)
