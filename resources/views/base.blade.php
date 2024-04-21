@@ -278,7 +278,7 @@
                                         'active' => isset($author) && $author_->is($author),
                                     ]) href="{{ route('author', ['user' => $author_]) }}">{{ $author_->name }} 
                                         <span class="badge bg-danger">
-                                            {{ $author_->posts()->whereLangCode($langCode->name)->count() }}
+                                            {{ $author_->posts()->where('Lang_code', $langCode->name)->where('active', true)->count() }}
                                         </span>
                                 </a>
                                 
