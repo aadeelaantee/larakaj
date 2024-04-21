@@ -14,7 +14,7 @@
 {!! form($form) !!}
 
 @if ($user->image)
-<img src="{{ $user->avatar() }}" class="img-thumbnail">
+<img src="{{ $user->avatar() }}" class="img-thumbnail rounded-circle">
 
 <p class="mt-3"> <a href="{{ route('delete_profile_image', ['user' => $user]) }}">{{ __('Delete profile image') }}</a> </p>
 @endif
