@@ -38,14 +38,14 @@ class IndexController extends Controller
         $data['title'] = $post->title;
 
         $data['next'] = Post::query()
-            ->where('id', '>', $post->id)
+            ->where('created_at', '>', $post->created_at)
             ->where('active', true)
             ->where('lang_code', $langCode->name)
             ->orderBy('created_at')
             ->first();
 
         $data['prev'] = Post::query()
-            ->where('id', '<', $post->id)
+            ->where('created_at', '<', $post->created_at)
             ->where('lang_code', $langCode->name)
             ->where('active', true)
             ->orderByDesc('created_at')
