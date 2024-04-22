@@ -22,8 +22,17 @@ class EditForm extends Form
                 ],
             ])
             ->add('default', 'select', [
-                'choices' => [1 => __('Yes'), 0 => __('No')],
-                // 'empty_value' => __('Select an item'),
+                'choices' => [
+                    1 => __('Yes'),
+                    0 => __('No'),
+                ],
+            ])
+            ->add('calendar_type', 'select', [
+                'label' => __('Calendar type'),
+                'choices' => [
+                    'gregorian' => __('Gregorian'),
+                    'jalali' => __('Jalali'),
+                ],
             ])
             ->add('rtl', 'checkbox', [
                 'label' => __('Right to left'),

@@ -71,6 +71,7 @@ class LangCodeController extends Controller
 
             'default' => 'required|boolean',
             'rtl'     => 'sometimes|boolean',
+            'calendar_type' => 'required|in:gregorian,jalali',
         ]);
 
         $nowIsDefault = $lc->default;
@@ -78,7 +79,8 @@ class LangCodeController extends Controller
         $lc->name = $validated['name'];
         $lc->default = (bool) $validated['default'];
         $lc->rtl = $request->boolean('rtl');
-
+        $lc->calendar_type = $validated['calendar_type'];
+        
         /*
         |----------------------------------------------------------------------
         | Error
