@@ -32,6 +32,9 @@
                 <span class="badge bg-danger">rtl</span>
             @endif
 
+            @if ($row->calendar_type == 'jalali')
+                <span class="badge bg-warning">{{ __(ucfirst($row->calendar_type)) }}</span>
+            @endif
         </td>
     </tr>
 

@@ -44,6 +44,18 @@
             @else
                 {!! $row->resume_html !!}
             @endif
+
+            <div class="mt-3 text-muted">
+
+                {{ __('Posted at') }}: 
+                @if ($langCode->calendar_type == 'jalali')
+                    <span dir=ltr class="me-3"> {{ verta($row->created_at)->format('Y-m-d') }} </span>
+                @else
+                    <span dir=ltr class="me-3"> {{ $row->created_at->format('Y-m-d') }} </span>
+                @endif
+
+                  ({{ $row->created_at->diffForHumans(['parts' => 3]) }})
+            </div>
         </div>
     </div>
 
