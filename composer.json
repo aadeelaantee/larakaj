@@ -9,6 +9,7 @@
         "doctrine/dbal": "^3.5.1",
         "elgigi/commonmark-emoji": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "hekmatinasser/verta": "^8.4",
         "kris/laravel-form-builder": "^1.52",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
