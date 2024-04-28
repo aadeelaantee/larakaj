@@ -7,7 +7,7 @@
 @section('title', $title)
 
 @section('meta_keywords', str_replace('+', ',', $row->meta_keywords))
-@section('meta_description', $row->meta_description)
+@section('meta_description', $row->meta_description ?: str($row->resume)->limit(250));
 
 @section('content')
 <div>
