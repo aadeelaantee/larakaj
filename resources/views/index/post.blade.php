@@ -7,7 +7,7 @@
 @section('title', $title)
 
 @section('meta_keywords', str_replace('+', ',', $row->meta_keywords))
-@section('meta_description', $row->meta_description ?: str(strip_tags($row->resume))->limit(250));
+@section('meta_description', $row->meta_description ?: str(strip_tags($row->resume_html))->limit(250));
 
 @section('content')
 <div>
