@@ -8,6 +8,7 @@
 <link rel="canonical" href="{{ config('app.url') }}/{{ $langCode->name }}/profile/{{ $user->username }}" />
 @endsection
 
+@section('meta_description', str(strip_tags($user->about_html))->limit(250));
 
 @section('content')
     <div class="row profile">
